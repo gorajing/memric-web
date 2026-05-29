@@ -7,7 +7,7 @@ const sections = [
 ---
 <div class="border border-hairline bg-viz p-6">
   <div class="font-mono text-[10px] tracking-[0.08em] uppercase text-graytext mb-4">Decision Memory Report · v1</div>
-  <ol class="grid gap-px bg-hairline border border-hairline">
+  <ol role="list" class="grid gap-px bg-hairline border border-hairline">
     {sections.map((s, i) => (
       <li class="bg-paper px-4 py-2.5 flex items-baseline gap-3">
         <span class="font-mono text-[11px] text-gutter">{String(i + 1).padStart(2, '0')}</span>
