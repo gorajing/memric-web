@@ -7,15 +7,15 @@ import BeliefDiff from './viz/BeliefDiff.astro';
 import DissentTimeline from './viz/DissentTimeline.astro';
 import ContradictionPair from './viz/ContradictionPair.astro';
 ---
-<section id="surfaces" class="px-[56px] py-[54px] max-w-[1180px] mx-auto">
+<section id="surfaces" aria-labelledby="surfaces-heading" class="px-[56px] py-[54px] max-w-[1180px] mx-auto">
   <!-- Section header -->
   <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">
     What Memric surfaces
   </p>
-  <h2 class="text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch] text-ink">
+  <h2 id="surfaces-heading" class="text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch] text-ink">
     Four things your firm can't see today.
   </h2>
-  <p class="text-[16px] text-[#3a3a3a] mt-[14px] max-w-[60ch]">
+  <p class="text-[16px] text-bodytext mt-[14px] max-w-[60ch]">
     Each is a typed, lineage-traced record — not a summary. Here's what each one looks like, on real material.
   </p>
 
@@ -35,7 +35,7 @@ import ContradictionPair from './viz/ContradictionPair.astro';
       <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
         <CalibrationChart />
       </div>
-      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+      <p class="text-[13px] text-caption leading-[1.5] mt-4">
         Every prediction, scored against what actually happened. The chronically overconfident show up immediately — by name.
       </p>
     </div>
@@ -51,7 +51,7 @@ import ContradictionPair from './viz/ContradictionPair.astro';
       <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
         <BeliefDiff />
       </div>
-      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+      <p class="text-[13px] text-caption leading-[1.5] mt-4">
         The supersession is the record. You can always replay what you believed and why it changed.
       </p>
     </div>
@@ -67,7 +67,7 @@ import ContradictionPair from './viz/ContradictionPair.astro';
       <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
         <DissentTimeline />
       </div>
-      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+      <p class="text-[13px] text-caption leading-[1.5] mt-4">
         Dissent is captured at the moment it's voiced, then matched to outcomes. Correct contrarians become visible.
       </p>
     </div>
@@ -83,7 +83,7 @@ import ContradictionPair from './viz/ContradictionPair.astro';
       <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
         <ContradictionPair />
       </div>
-      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+      <p class="text-[13px] text-caption leading-[1.5] mt-4">
         Two principles, both currently active, mutually exclusive. Surfaced before the next IC meeting — not after.
       </p>
     </div>
