@@ -7,12 +7,12 @@ import BeliefDiff from './viz/BeliefDiff.astro';
 import DissentTimeline from './viz/DissentTimeline.astro';
 import ContradictionPair from './viz/ContradictionPair.astro';
 ---
-<section id="surfaces" aria-labelledby="surfaces-heading" class="px-[56px] py-[54px] max-w-[1180px] mx-auto">
+<section id="surfaces" aria-labelledby="surfaces-heading" class="px-6 sm:px-10 lg:px-14 py-[54px] max-w-[1180px] mx-auto">
   <!-- Section header -->
   <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">
     What Memric surfaces
   </p>
-  <h2 id="surfaces-heading" class="text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch] text-ink">
+  <h2 id="surfaces-heading" class="text-[26px] sm:text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch] text-ink">
     Four things your firm can't see today.
   </h2>
   <p class="text-[16px] text-bodytext mt-[14px] max-w-[60ch]">
@@ -21,8 +21,8 @@ import ContradictionPair from './viz/ContradictionPair.astro';
 
   <!-- 2×2 grid: gap:1px hairline background creates the hairline dividers between cards -->
   <div
-    class="grid mt-10 border border-ink"
-    style="grid-template-columns:1fr 1fr; gap:1px; background:#e3e3e3"
+    class="grid grid-cols-1 sm:grid-cols-2 mt-10 border border-ink"
+    style="gap:1px; background:#e3e3e3"
   >
     <!-- Card 01: Calibration -->
     <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
@@ -32,7 +32,7 @@ import ContradictionPair from './viz/ContradictionPair.astro';
       <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
         Calibration, per author
       </h3>
-      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
+      <div class="h-[172px] border border-hairline bg-viz relative overflow-x-auto">
         <CalibrationChart />
       </div>
       <p class="text-[13px] text-caption leading-[1.5] mt-4">

@@ -33,6 +33,7 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
     <meta property="og:url" content={Astro.url.href} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
     <a

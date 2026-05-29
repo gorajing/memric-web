@@ -5,9 +5,9 @@ const links = [
   { label: 'Contact', href: '#contact', accent: true },
 ];
 ---
-<nav aria-label="Site" class="mx-auto max-w-[1180px] px-14 flex items-center justify-between pt-7 pb-5 border-b-2 border-ink">
+<nav aria-label="Site" class="mx-auto max-w-[1180px] px-6 sm:px-10 lg:px-14 flex items-center justify-between pt-7 pb-5 border-b-2 border-ink">
   <a href="#top" class="text-[18px] font-bold tracking-[-0.02em] text-ink no-underline">MEMRIC</a>
-  <div class="flex gap-7 text-[13px]">
+  <div class="flex gap-4 sm:gap-7 text-[13px]">
     {links.map((l) => (
       <a href={l.href} class={`no-underline ${l.accent ? 'text-accent' : 'text-ink'}`}>{l.label}</a>
     ))}
