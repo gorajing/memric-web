@@ -2,14 +2,14 @@
 const links = [
   { label: 'Approach', href: '#approach' },
   { label: 'What it surfaces', href: '#surfaces' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '#contact', accent: true },
 ];
 ---
-<nav class="mx-auto max-w-[1180px] px-14 flex items-center justify-between pt-7 pb-5 border-b-2 border-ink">
+<nav aria-label="Site" class="mx-auto max-w-[1180px] px-14 flex items-center justify-between pt-7 pb-5 border-b-2 border-ink">
   <a href="#top" class="text-[18px] font-bold tracking-[-0.02em] text-ink no-underline">MEMRIC</a>
   <div class="flex gap-7 text-[13px]">
-    {links.map((l, i) => (
-      <a href={l.href} class={`no-underline ${i === links.length - 1 ? 'text-accent' : 'text-ink'}`}>{l.label}</a>
+    {links.map((l) => (
+      <a href={l.href} class={`no-underline ${l.accent ? 'text-accent' : 'text-ink'}`}>{l.label}</a>
     ))}
   </div>
 </nav>

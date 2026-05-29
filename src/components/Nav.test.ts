@@ -8,4 +8,5 @@ test('nav renders the wordmark and section anchors', async () => {
   expect(html).toContain('MEMRIC');
   expect(html).toContain('href="#approach"');
   expect(html).toContain('href="#contact"');
+  expect(html).toContain('href="#surfaces"');
 });
