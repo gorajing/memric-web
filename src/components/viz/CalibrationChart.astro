@@ -1,0 +1,54 @@
+---
+// CalibrationChart — per-author prediction calibration scatter
+// Ported verbatim from capabilities-visuals-v2.html .calib SVG
+// viewBox="0 0 480 172", plot frame x 56..188 y 24..148
+---
+<svg
+  class="block w-full h-full"
+  viewBox="0 0 480 172"
+  preserveAspectRatio="xMidYMid meet"
+  font-family="IBM Plex Mono, monospace"
+  aria-hidden="true"
+>
+  <!-- gridlines -->
+  <line x1="56" y1="24" x2="56" y2="148" stroke="#e3e3e3" stroke-width="1"/>
+  <line x1="56" y1="148" x2="188" y2="148" stroke="#e3e3e3" stroke-width="1"/>
+  <line x1="56" y1="86" x2="188" y2="86" stroke="#f0f0ee" stroke-width="1"/>
+  <line x1="122" y1="24" x2="122" y2="148" stroke="#f0f0ee" stroke-width="1"/>
+
+  <!-- perfect calibration diagonal -->
+  <line x1="56" y1="148" x2="188" y2="24" stroke="#c4c4c4" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="150" y="40" font-size="8.5" fill="#c4c4c4" transform="rotate(-45 150 40)">perfect</text>
+
+  <!-- Author A: S. Reyes — well calibrated (hugs diagonal) -->
+  <polyline points="82,127 109,105 135,79 161,57 175,42" fill="none" stroke="#111111" stroke-width="1.5"/>
+  <circle cx="82" cy="127" r="3.4" fill="#111111"/>
+  <circle cx="109" cy="105" r="3.4" fill="#111111"/>
+  <circle cx="135" cy="79" r="3.4" fill="#111111"/>
+  <circle cx="161" cy="57" r="3.4" fill="#111111"/>
+  <circle cx="175" cy="42" r="3.4" fill="#111111"/>
+
+  <!-- Author B: D. Park — overconfident (sags below diagonal at the high end) -->
+  <polyline points="109,118 135,108 161,103 178,99" fill="none" stroke="#d42a1f" stroke-width="1.5"/>
+  <circle cx="109" cy="118" r="3.4" fill="#d42a1f"/>
+  <circle cx="135" cy="108" r="3.4" fill="#d42a1f"/>
+  <circle cx="161" cy="103" r="3.4" fill="#d42a1f"/>
+  <circle cx="178" cy="99" r="3.4" fill="#d42a1f"/>
+
+  <!-- axis ticks -->
+  <text x="48" y="151" font-size="8.5" fill="#c4c4c4" text-anchor="end">0</text>
+  <text x="48" y="28" font-size="8.5" fill="#c4c4c4" text-anchor="end">100</text>
+  <text x="56" y="162" font-size="8.5" fill="#c4c4c4" text-anchor="middle">0</text>
+  <text x="188" y="162" font-size="8.5" fill="#c4c4c4" text-anchor="middle">100</text>
+  <text x="122" y="171" font-size="9" fill="#8a8a8a" letter-spacing="0.04em" text-anchor="middle">predicted&nbsp;%</text>
+  <text x="34" y="86" font-size="9" fill="#8a8a8a" letter-spacing="0.04em" text-anchor="middle" transform="rotate(-90 34 86)">resolved&nbsp;%</text>
+
+  <!-- legend -->
+  <text x="250" y="40" font-size="8.5" fill="#c4c4c4" letter-spacing="0.1em">CALIBRATION BY AUTHOR</text>
+  <circle cx="256" cy="68" r="4" fill="#111111"/>
+  <text x="270" y="66" font-size="10" fill="#111111" font-weight="500">S. Reyes</text>
+  <text x="270" y="80" font-size="8.5" fill="#8a8a8a">well calibrated · Brier 0.04</text>
+  <circle cx="256" cy="108" r="4" fill="#d42a1f"/>
+  <text x="270" y="106" font-size="10" fill="#111111" font-weight="500">D. Park</text>
+  <text x="270" y="120" font-size="8.5" fill="#d42a1f">overconfident · +1.6σ at high conviction</text>
+</svg>

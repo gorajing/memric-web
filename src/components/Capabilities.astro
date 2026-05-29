@@ -1,0 +1,91 @@
+---
+// Capabilities — Section 03 "What Memric surfaces"
+// 2×2 grid of four cards, each with a typed artifact visualization
+// Ported from capabilities-visuals-v2.html
+import CalibrationChart from './viz/CalibrationChart.astro';
+import BeliefDiff from './viz/BeliefDiff.astro';
+import DissentTimeline from './viz/DissentTimeline.astro';
+import ContradictionPair from './viz/ContradictionPair.astro';
+---
+<section id="surfaces" class="px-[56px] py-[54px] max-w-[1180px] mx-auto">
+  <!-- Section header -->
+  <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">
+    What Memric surfaces
+  </p>
+  <h2 class="text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch] text-ink">
+    Four things your firm can't see today.
+  </h2>
+  <p class="text-[16px] text-[#3a3a3a] mt-[14px] max-w-[60ch]">
+    Each is a typed, lineage-traced record — not a summary. Here's what each one looks like, on real material.
+  </p>
+
+  <!-- 2×2 grid: gap:1px hairline background creates the hairline dividers between cards -->
+  <div
+    class="grid mt-10 border border-ink"
+    style="grid-template-columns:1fr 1fr; gap:1px; background:#e3e3e3"
+  >
+    <!-- Card 01: Calibration -->
+    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
+      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+        01 / Predictions vs. outcomes
+      </p>
+      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
+        Calibration, per author
+      </h3>
+      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
+        <CalibrationChart />
+      </div>
+      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+        Every prediction, scored against what actually happened. The chronically overconfident show up immediately — by name.
+      </p>
+    </div>
+
+    <!-- Card 02: Belief Diff -->
+    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
+      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+        02 / Principle lifecycle
+      </p>
+      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
+        Beliefs that retire when superseded
+      </h3>
+      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
+        <BeliefDiff />
+      </div>
+      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+        The supersession is the record. You can always replay what you believed and why it changed.
+      </p>
+    </div>
+
+    <!-- Card 03: Dissent Timeline -->
+    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
+      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+        03 / Dissent analysis
+      </p>
+      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
+        Who pushed back — and was right
+      </h3>
+      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
+        <DissentTimeline />
+      </div>
+      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+        Dissent is captured at the moment it's voiced, then matched to outcomes. Correct contrarians become visible.
+      </p>
+    </div>
+
+    <!-- Card 04: Contradiction Pair -->
+    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
+      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+        04 / Open contradictions
+      </p>
+      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
+        Live beliefs that can't both be true
+      </h3>
+      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
+        <ContradictionPair />
+      </div>
+      <p class="text-[13px] text-[#5a5a5a] leading-[1.5] mt-4">
+        Two principles, both currently active, mutually exclusive. Surfaced before the next IC meeting — not after.
+      </p>
+    </div>
+  </div>
+</section>

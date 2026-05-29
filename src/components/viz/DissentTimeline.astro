@@ -1,0 +1,40 @@
+---
+// DissentTimeline — horizontal timeline showing dissent captured then proven correct
+// Ported verbatim from capabilities-visuals-v2.html .tl block
+---
+<div class="px-[22px] py-[30px]">
+  <div class="relative h-0.5 bg-gutter mx-[10px] mt-[34px] mb-[34px]">
+    <!-- labels above line -->
+    <span
+      class="absolute font-mono text-[10px] whitespace-nowrap text-ink"
+      style="left:0; top:-32px"
+    >2024-Q2 · J. Okafor dissents</span>
+    <span
+      class="absolute font-mono text-[10px] whitespace-nowrap text-correct text-right"
+      style="right:0; top:-32px"
+    >2025-Q3 · proven correct</span>
+
+    <!-- point A: dissent -->
+    <span
+      class="absolute top-[-5px] w-3 h-3 rounded-full bg-paper border-2 border-ink"
+      style="left:8%"
+    ></span>
+
+    <!-- dashed span with pill -->
+    <span
+      class="absolute"
+      style="left:8%; width:70%; top:14px; border-top:1px dashed #c4c4c4"
+    >
+      <span
+        class="absolute font-mono text-[11px] text-correct bg-greentint px-2 py-0.5 rounded-[3px]"
+        style="left:50%; transform:translateX(-50%); top:6px"
+      >+14 months early</span>
+    </span>
+
+    <!-- point B: proven correct -->
+    <span
+      class="absolute top-[-5px] w-3 h-3 rounded-full border-2"
+      style="left:78%; border-color:#1a7a3f; background:#1a7a3f"
+    ></span>
+  </div>
+</div>
