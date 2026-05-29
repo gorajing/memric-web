@@ -1,0 +1,23 @@
+---
+const artifacts = [
+  { kind: 'IC MEMO', title: 'NVDA initiation' },
+  { kind: 'POST-MORTEM', title: 'TWLO close-out' },
+  { kind: 'SECTOR THESIS', title: 'AI infrastructure' },
+  { kind: 'QUARTERLY LETTER', title: 'Q4 to LPs' },
+  { kind: 'SLACK THREAD', title: 'NVDA trim debate' },
+  { kind: 'MEETING NOTE', title: 'GP offsite' },
+];
+---
+<div class="relative border border-hairline bg-viz">
+  <div class="grid grid-cols-2 sm:grid-cols-3">
+    {artifacts.map((a) => (
+      <div class="border-b border-r border-hairline p-4">
+        <div class="font-mono text-[10px] tracking-[0.06em] text-graytext">{a.kind}</div>
+        <div class="text-[14px] mt-1 text-ink">{a.title}</div>
+      </div>
+    ))}
+  </div>
+  <div class="pointer-events-none absolute inset-0 flex items-center justify-center bg-paper/55">
+    <span class="font-mono text-[12px] tracking-[0.12em] uppercase text-accent border border-accent px-3 py-1">un-indexed · no memory across them</span>
+  </div>
+</div>
