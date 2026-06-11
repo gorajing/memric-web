@@ -1,14 +1,50 @@
 ---
 import LineageGraph from './viz/LineageGraph.astro';
 ---
-<section aria-labelledby="trust-heading" class="bg-sectionpaper border-t border-hairline">
-  <div class="mx-auto max-w-[1180px] px-6 sm:px-10 lg:px-14 py-20 grid lg:grid-cols-2 gap-12 items-center">
-    <div>
-      <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">Trust by architecture</p>
-      <h2 id="trust-heading" class="text-[26px] sm:text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch]">Every claim carries its lineage.</h2>
-      <p class="text-[16px] text-bodytext mt-3.5 max-w-[52ch]">Nothing Memric asserts is unsourced. Each principle, retirement, and resolved prediction traces through typed citations back to the documents that produced it — so the record is defensible, not just plausible.</p>
-      <p class="text-[16px] text-bodytext mt-3.5 max-w-[52ch]">The engine runs in <strong>your environment</strong> — your machine or your VPC. Your raw documents never have to leave it.</p>
+<section aria-labelledby="trust-heading" class="bg-sectionpaper border-t border-ink/80">
+  <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+    <div class="chapter-grid">
+      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <p class="font-mono text-[11px] tracking-[0.12em] uppercase text-accent mb-4">Trust by architecture</p>
+        <h2 id="trust-heading" class="font-display text-balance text-[42px] sm:text-[62px] font-semibold tracking-normal leading-[0.95] max-w-[13ch]">A claim is not trusted until it can be replayed.</h2>
+        <p class="text-[17px] text-bodytext leading-[1.7] mt-5 max-w-[58ch] text-pretty">Nothing Memric asserts is free-floating. Every principle, prediction, and contradiction carries its evidence, its method, and its lineage back to the documents that produced it.</p>
+        <p class="text-[17px] text-bodytext leading-[1.7] mt-4 max-w-[58ch] text-pretty">The engine runs in <strong>your environment</strong> — your machine or your VPC. Your raw documents never have to leave it.</p>
+      </div>
+      <div class="grid gap-5" data-reveal style="--reveal-delay: 140ms">
+        <article class="audit-panel border border-ink bg-paper" aria-label="Evidence card for a retired principle">
+          <div class="border-b border-ink px-5 py-4 sm:px-6">
+            <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Claim card / PRI-0042</p>
+            <h3 class="font-display mt-2 text-[29px] font-semibold tracking-normal leading-tight">AI-infrastructure margins are structurally durable.</h3>
+          </div>
+          <div class="grid gap-px bg-hairline sm:grid-cols-2">
+            <div class="bg-paper px-5 py-4 sm:px-6">
+              <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Evidence span</p>
+              <p class="mt-2 text-[13.5px] leading-relaxed text-bodytext">IC memo, NVDA initiation, paragraph 2. Confidence: high. Extractor: thesis-v3.</p>
+            </div>
+            <div class="bg-paper px-5 py-4 sm:px-6">
+              <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">Lifecycle event</p>
+              <p class="mt-2 text-[13.5px] leading-relaxed text-bodytext">SUPERSEDES and RETIRES after three post-mortems contradict the margin thesis.</p>
+            </div>
+          </div>
+        </article>
+        <div class="border border-ink bg-viz p-6 overflow-x-auto" tabindex="0" role="region" aria-label="Lineage diagram (scrollable)">
+          <LineageGraph />
+        </div>
+        <div class="grid gap-px border border-ink bg-ink sm:grid-cols-3">
+          <div class="bg-paper p-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Source evidence</p>
+            <p class="mt-2 text-[14px] font-semibold">Every claim points back to a source span.</p>
+          </div>
+          <div class="bg-paper p-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Method trace</p>
+            <p class="mt-2 text-[14px] font-semibold">Extractor and ontology versions stay attached.</p>
+          </div>
+          <div class="bg-paper p-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Deployment</p>
+            <p class="mt-2 text-[14px] font-semibold">Runs locally or inside your VPC.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="border border-hairline bg-viz p-6 overflow-x-auto" tabindex="0" role="region" aria-label="Lineage diagram (scrollable)"><LineageGraph /></div>
   </div>
 </section>

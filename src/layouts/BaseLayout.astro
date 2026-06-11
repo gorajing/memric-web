@@ -1,11 +1,14 @@
 ---
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
-import '@fontsource/ibm-plex-mono/600.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import '@fontsource/ibm-plex-mono/latin-600.css';
+import '@fontsource/newsreader/latin-500.css';
+import '@fontsource/newsreader/latin-600.css';
+import '@fontsource/newsreader/latin-700.css';
 import '../styles/global.css';
 
 interface Props {
@@ -13,9 +16,11 @@ interface Props {
   description?: string;
 }
 const {
-  title = 'Memric — Institutional judgment memory',
-  description = 'Memric reads your firm’s IC memos, post-mortems, and theses and surfaces what you believed, what got contradicted, who dissented correctly, and which live proposals echo a prior failed assumption.',
+  title = 'Memric — Decision ledger for investment firms',
+  description = 'Memric turns investment-firm documents into a lineage-traced ledger of beliefs, predictions, dissent, retirements, contradictions, and prior mistakes.',
 } = Astro.props;
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.href;
+const ogImageUrl = new URL('/og.png', canonicalUrl).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -23,14 +28,23 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#fcfcf8" />
+    <meta property="og:site_name" content="Memric" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <!-- TODO: add og:image once a social card is designed -->
-    <meta property="og:url" content={Astro.url.href} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
@@ -40,5 +54,29 @@ const {
   >Skip to content</a
 >
     <slot />
+    <script>
+      const revealItems = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+
+      if (
+        revealItems.length > 0 &&
+        'IntersectionObserver' in window &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        document.documentElement.classList.add('has-reveal');
+
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.16 }
+        );
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+      }
+    </script>
   </body>
 </html>

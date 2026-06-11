@@ -1,11 +1,190 @@
 ---
-import ArtifactShelf from './viz/ArtifactShelf.astro';
+const sourceDocs = [
+  {
+    id: 'memo',
+    title: 'IC memo',
+    meta: 'SRC-2309-A17',
+    preserved: 'Text, author, date',
+    owner: 'D. Park',
+    confidence: '82%',
+    evidence: 'Paragraph 2',
+    outcome: 'Resolved true',
+  },
+  {
+    id: 'postmortem',
+    title: 'Post-mortem',
+    meta: 'PM-2601-B03',
+    preserved: 'Conclusion after the fact',
+    owner: 'IC Ops',
+    confidence: 'Retired',
+    evidence: '3 linked misses',
+    outcome: 'Principle superseded',
+  },
+  {
+    id: 'dissent',
+    title: 'Slack dissent thread',
+    meta: 'DST-2405-C12',
+    preserved: 'Buried disagreement',
+    owner: 'J. Okafor',
+    confidence: 'Low consensus',
+    evidence: 'ASIC capex thread',
+    outcome: '+14 months early',
+  },
+];
+
+const memoryObjects = [
+  { source: 'memo', label: 'Belief', value: 'AI-infra margins remain durable', status: 'active then retired' },
+  { source: 'memo', label: 'Prediction', value: 'GPU demand exceeds supply through 2024-Q4', status: 'resolved true' },
+  { source: 'dissent', label: 'Dissent', value: 'Okafor flags ASIC margin compression', status: 'vindicated' },
+  { source: 'postmortem', label: 'Retirement', value: 'PRI-0042 superseded by post-mortems', status: 'superseded' },
+];
+
+const stateRows = ['owner', 'confidence', 'evidence', 'outcome'];
 ---
-<section class="bg-sectionpaper border-t border-hairline" aria-labelledby="gap-heading">
-  <div class="mx-auto max-w-[1180px] px-6 sm:px-10 lg:px-14 py-20">
-    <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">The gap</p>
-    <h2 id="gap-heading" class="text-[26px] sm:text-[34px] font-semibold tracking-[-0.03em] max-w-[20ch]">Your firm has perfect records — and no memory.</h2>
-    <p class="text-[16px] text-bodytext mt-3.5 max-w-[60ch]">Hundreds of IC memos, post-mortems, theses, and letters. Every number preserved; every judgment forgotten. Nothing tells you what you used to believe, when it broke, or who saw it first.</p>
-    <div class="mt-10"><ArtifactShelf /></div>
+<section id="proof" class="border-t border-ink/80 bg-sectionpaper" aria-labelledby="gap-heading">
+  <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+    <div class="chapter-grid">
+      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+        <div class="flex gap-5">
+          <p class="chapter-kicker font-mono text-[11px] uppercase tracking-[0.12em] text-accent">The gap</p>
+          <div>
+            <h2 id="gap-heading" class="font-display max-w-[13ch] text-balance text-[40px] font-semibold leading-[0.96] tracking-normal text-ink sm:text-[56px]">
+              Search finds the memo. Memric remembers the judgment.
+            </h2>
+            <p class="mt-5 max-w-[58ch] text-[17px] leading-[1.7] text-pretty text-bodytext">The gap is not storage. It is continuity. Every document survives, but the belief inside it loses its owner, its confidence, its evidence, its outcome.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-6">
+        <div class="memory-state-console grid gap-px border border-ink bg-ink lg:grid-cols-[0.92fr_0.42fr_0.92fr]" data-state-panel data-reveal style="--reveal-delay: 120ms">
+          <div class="bg-paper p-5 sm:p-7">
+            <p class="font-mono text-[10.5px] uppercase tracking-[0.08em] text-graytext">Before / preserved artifacts</p>
+            <div class="mt-5 grid gap-px bg-hairline border border-hairline">
+              {sourceDocs.map((doc) => (
+                <button
+                  type="button"
+                  class="state-source reveal-card min-h-[92px] bg-sectionpaper p-4 text-left"
+                  data-state-source={doc.id}
+                  data-owner={doc.owner}
+                  data-confidence={doc.confidence}
+                  data-evidence={doc.evidence}
+                  data-outcome={doc.outcome}
+                >
+                  <span class="flex items-baseline justify-between gap-3">
+                    <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-gutter">{doc.meta}</span>
+                    <span class="state-source-dot" aria-hidden="true"></span>
+                  </span>
+                  <span class="mt-2 block text-[15px] font-semibold text-ink">{doc.title}</span>
+                  <span class="mt-2 block font-mono text-[10.5px] uppercase tracking-[0.07em] text-caption">{doc.preserved}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center bg-ink px-5 py-6 text-paper">
+            <div class="w-full">
+              <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-white/50">State fingerprint</p>
+              <div class="mt-4 grid gap-px border border-white/20 bg-white/20">
+                {stateRows.map((row) => (
+                  <div class="state-row bg-ink px-3 py-3" data-state-row={row}>
+                    <p class="font-mono text-[9px] uppercase tracking-[0.08em] text-white/38">{row}</p>
+                    <p class="mt-1 min-h-[20px] text-[13px] font-semibold leading-snug text-paper" data-state-value={row}>-</p>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.08em] text-white/45">
+                <span class="h-px flex-1 bg-white/25"></span>
+                <span>lineage kept</span>
+                <span class="h-px flex-1 bg-white/25"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-paper p-5 sm:p-7">
+            <p class="font-mono text-[10.5px] uppercase tracking-[0.08em] text-graytext">After / typed memory</p>
+            <div class="mt-5 grid gap-3">
+              {memoryObjects.map((object) => (
+                <div class="memory-object reveal-card border border-hairline bg-viz px-4 py-3" data-memory-object={object.source}>
+                  <div class="flex items-baseline justify-between gap-4">
+                    <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{object.label}</p>
+                    <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-caption">{object.status}</p>
+                  </div>
+                  <p class="mt-2 text-[14px] font-semibold leading-snug text-ink">{object.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-px border border-ink bg-ink sm:grid-cols-3" data-reveal style="--reveal-delay: 180ms">
+          <div class="bg-ink p-5 text-paper">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/50">Not search</p>
+            <p class="font-display mt-3 text-[26px] leading-tight">Search retrieves text.</p>
+          </div>
+          <div class="bg-paper p-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">Not chat</p>
+            <p class="font-display mt-3 text-[26px] leading-tight">Chat summarizes text.</p>
+          </div>
+          <div class="bg-paper p-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-accent">Memric</p>
+            <p class="font-display mt-3 text-[26px] leading-tight">Memric preserves judgment state.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  const statePanels = document.querySelectorAll<HTMLElement>('[data-state-panel]');
+
+  statePanels.forEach((panel) => {
+    const sourceButtons = Array.from(panel.querySelectorAll<HTMLElement>('[data-state-source]'));
+    const memoryObjects = Array.from(panel.querySelectorAll<HTMLElement>('[data-memory-object]'));
+    const stateValues = Array.from(panel.querySelectorAll<HTMLElement>('[data-state-value]'));
+    const records = new Map(
+      sourceButtons.map((button) => [
+        button.dataset.stateSource,
+        {
+          owner: button.dataset.owner,
+          confidence: button.dataset.confidence,
+          evidence: button.dataset.evidence,
+          outcome: button.dataset.outcome,
+        },
+      ])
+    );
+
+    const setActiveState = (key: string | undefined) => {
+      if (!key) return;
+      const record = records.get(key);
+      if (!record) return;
+
+      sourceButtons.forEach((button) => {
+        const active = button.dataset.stateSource === key;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      memoryObjects.forEach((object) => {
+        object.classList.toggle('is-active', object.dataset.memoryObject === key);
+      });
+
+      stateValues.forEach((value) => {
+        const field = value.dataset.stateValue;
+        value.textContent = field ? record[field as keyof typeof record] ?? '-' : '-';
+      });
+    };
+
+    sourceButtons.forEach((button) => {
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('mouseenter', () => setActiveState(button.dataset.stateSource));
+      button.addEventListener('focus', () => setActiveState(button.dataset.stateSource));
+      button.addEventListener('click', () => setActiveState(button.dataset.stateSource));
+    });
+
+    if (sourceButtons[0]?.dataset.stateSource) {
+      setActiveState(sourceButtons[0].dataset.stateSource);
+    }
+  });
+</script>

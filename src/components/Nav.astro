@@ -1,15 +1,86 @@
 ---
+interface Props {
+  home?: boolean;
+}
+
+const { home = true } = Astro.props;
 const links = [
-  { label: 'Approach', href: '#approach' },
-  { label: 'What it surfaces', href: '#surfaces' },
+  { label: 'Proof', href: '#proof' },
+  { label: 'Surfaces', href: '#surfaces', mobileHidden: true },
+  { label: 'Audit', href: '#audit' },
+  { label: 'Report', href: '/meridian-report/', mobileHidden: true, absolute: true },
   { label: 'Contact', href: '#contact', accent: true },
 ];
+
+const sectionHref = (link: typeof links[number]) => {
+  if (link.absolute) return link.href;
+  return home ? link.href : `/${link.href}`;
+};
 ---
-<nav aria-label="Site" class="mx-auto max-w-[1180px] px-6 sm:px-10 lg:px-14 flex items-center justify-between pt-7 pb-5 border-b-2 border-ink">
-  <a href="#top" class="text-[18px] font-bold tracking-[-0.02em] text-ink no-underline">MEMRIC</a>
-  <div class="flex gap-4 sm:gap-7 text-[13px]">
-    {links.map((l) => (
-      <a href={l.href} class={`no-underline ${l.accent ? 'text-accent' : 'text-ink'}`}>{l.label}</a>
-    ))}
+<nav aria-label="Site" class="site-nav sticky top-0 z-40 border-b border-ink/80 bg-paper/90 backdrop-blur-md" style="--nav-progress: 0%">
+  <div class="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12 flex items-center justify-between py-4">
+    <a href={home ? '#top' : '/'} class="font-display text-[22px] font-bold tracking-normal text-ink no-underline">Memric</a>
+    <div class="flex flex-wrap justify-end gap-x-3 gap-y-1 sm:gap-x-6 text-[12px] sm:text-[13px]">
+      {links.map((l) => (
+        <a
+          href={sectionHref(l)}
+          data-section-target={l.absolute ? undefined : l.href.slice(1)}
+          class={`nav-link font-mono uppercase tracking-[0.08em] no-underline transition-colors hover:text-accent ${l.mobileHidden ? 'hidden sm:inline' : ''} ${l.accent ? 'text-accent' : 'text-ink'}`}
+        >{l.label}</a>
+      ))}
+    </div>
   </div>
+  <div class="nav-progress" aria-hidden="true"></div>
 </nav>
+
+<script>
+  const navs = document.querySelectorAll<HTMLElement>('.site-nav');
+  const sectionLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-section-target]'));
+  const sectionPairs = sectionLinks
+    .map((link) => {
+      const section = document.getElementById(link.dataset.sectionTarget ?? '');
+      return section ? { link, section } : null;
+    })
+    .filter((pair): pair is { link: HTMLAnchorElement; section: HTMLElement } => pair !== null);
+  let ticking = false;
+
+  const updateNavProgress = () => {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const progress = Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100));
+
+    navs.forEach((nav) => {
+      nav.style.setProperty('--nav-progress', `${progress}%`);
+    });
+
+    const markerY = window.innerHeight * 0.5;
+    let activePair: (typeof sectionPairs)[number] | undefined;
+
+    sectionPairs.forEach((pair) => {
+      if (pair.section.getBoundingClientRect().top <= markerY) {
+        activePair = pair;
+      }
+    });
+
+    sectionPairs.forEach((pair) => {
+      const active = activePair ? pair === activePair : false;
+      pair.link.classList.toggle('is-current', active);
+      if (active) {
+        pair.link.setAttribute('aria-current', 'location');
+      } else {
+        pair.link.removeAttribute('aria-current');
+      }
+    });
+
+    ticking = false;
+  };
+
+  const requestNavProgressUpdate = () => {
+    if (ticking) return;
+    window.requestAnimationFrame(updateNavProgress);
+    ticking = true;
+  };
+
+  updateNavProgress();
+  window.addEventListener('scroll', requestNavProgressUpdate, { passive: true });
+  window.addEventListener('resize', requestNavProgressUpdate);
+</script>

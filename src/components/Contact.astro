@@ -1,7 +1,79 @@
-<section id="contact" aria-labelledby="contact-heading" class="border-t border-hairline">
-  <div class="mx-auto max-w-[1180px] px-6 sm:px-10 lg:px-14 py-24">
-    <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">Contact</p>
-    <h2 id="contact-heading" class="text-[26px] sm:text-[34px] font-semibold tracking-[-0.03em] max-w-[24ch]">If your firm has decades of decisions and no memory of them, get in touch.</h2>
-    <a href="mailto:jin@memric.ai" class="inline-block mt-8 bg-ink text-paper px-6 py-3.5 text-[15px] font-medium no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">jin@memric.ai</a>
+---
+const subject = encodeURIComponent('Memric Decision Memory Audit');
+const body = encodeURIComponent(`Hi Jin,
+
+I want to explore a Memric Decision Memory Audit.
+
+Representative corpus:
+- IC memos:
+- Post-mortems:
+- Meeting notes / dissent threads:
+
+What we need to learn:
+
+Preferred timeline:
+`);
+const auditMailto = `mailto:jin@memric.ai?subject=${subject}&body=${body}`;
+
+const intakeItems = [
+  { label: 'Corpus', value: '12-50 representative memos, post-mortems, letters, and dissent threads.' },
+  { label: 'Question', value: 'Which beliefs, forecasts, and dissent records should shape the next IC packet?' },
+  { label: 'Return', value: 'Decision Memory Report, typed ledger, source lineage, and replayable Memric instance.' },
+];
+
+const auditSteps = [
+  { week: 'Week 0', title: 'Select corpus', detail: 'Choose the documents that reveal how the firm actually made decisions.' },
+  { week: 'Week 2', title: 'Review ledger', detail: 'Inspect extracted predictions, principles, dissent, contradictions, and source spans.' },
+  { week: 'Week 4', title: 'Keep system', detail: 'Use the report and running instance against the next live proposal.' },
+];
+---
+<section id="contact" aria-labelledby="contact-heading" class="border-t border-ink/80 bg-paper">
+  <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+    <div class="grid gap-10 border-y-2 border-ink py-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <div data-reveal>
+        <p class="font-mono text-[11px] tracking-[0.12em] uppercase text-accent mb-4">Contact</p>
+        <h2 id="contact-heading" class="font-display text-balance text-[44px] sm:text-[72px] font-semibold tracking-normal leading-[0.92] max-w-[14ch]">If judgment is trapped in old documents, build the ledger.</h2>
+        <p class="mt-5 max-w-[58ch] text-[17px] leading-[1.7] text-pretty text-bodytext">Start with a representative corpus. Four weeks later, keep the Decision Memory Report and a Memric instance you can replay against every source.</p>
+      </div>
+
+      <div class="contact-packet border border-ink bg-ink p-1 text-paper" data-reveal style="--reveal-delay: 140ms">
+        <div class="grid gap-px bg-white/20">
+          <div class="bg-paper p-5 text-ink sm:p-6">
+            <div class="flex items-start justify-between gap-4 border-b border-ink/15 pb-4">
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">Audit intake packet</p>
+                <h3 class="font-display mt-2 text-[32px] font-semibold leading-tight tracking-normal">Bring the documents. Leave with institutional memory.</h3>
+              </div>
+              <span class="hidden border border-accent px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-accent sm:inline-flex">4 weeks</span>
+            </div>
+
+            <dl class="mt-5 grid gap-px border border-hairline bg-hairline">
+              {intakeItems.map((item) => (
+                <div class="bg-viz px-4 py-3">
+                  <dt class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{item.label}</dt>
+                  <dd class="mt-1 text-[14px] font-semibold leading-snug text-ink">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <ol role="list" class="grid gap-px bg-white/20 md:grid-cols-3">
+            {auditSteps.map((step) => (
+              <li class="bg-ink p-5">
+                <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/45">{step.week}</p>
+                <h4 class="mt-3 text-[15px] font-semibold text-paper">{step.title}</h4>
+                <p class="mt-2 text-[13px] leading-relaxed text-white/62">{step.detail}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div class="flex flex-col gap-3 bg-paper p-5 text-ink sm:flex-row sm:flex-wrap sm:items-center sm:p-6">
+            <a href={auditMailto} class="inline-block bg-ink text-paper px-6 py-3.5 text-[15px] font-medium no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Start audit brief</a>
+            <a href="/meridian-report/" class="inline-block border border-ink text-ink px-6 py-3.5 text-[15px] font-medium no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Inspect sample</a>
+            <a href="https://github.com/gorajing/memric" class="inline-block border border-ink text-ink px-6 py-3.5 text-[15px] font-medium no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">View GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

@@ -1,0 +1,338 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CalibrationChart from '../components/viz/CalibrationChart.astro';
+import BeliefDiff from '../components/viz/BeliefDiff.astro';
+import ContradictionPair from '../components/viz/ContradictionPair.astro';
+import DissentTimeline from '../components/viz/DissentTimeline.astro';
+import LineageGraph from '../components/viz/LineageGraph.astro';
+
+const reportStats = [
+  { value: '12', label: 'source documents' },
+  { value: '47', label: 'typed records' },
+  { value: '18', label: 'resolved predictions' },
+  { value: '0', label: 'uncited claims' },
+];
+
+const reportNav = [
+  { href: '#summary', n: '00', label: 'Executive summary' },
+  { href: '#timeline', n: '01', label: 'Decision timeline' },
+  { href: '#calibration', n: '02', label: 'Calibration + retired belief' },
+  { href: '#dissent', n: '04', label: 'Dissent analysis' },
+  { href: '#lineage', n: '05', label: 'Lineage + contradiction' },
+  { href: '#claims', n: '07', label: 'Claims + recommendations' },
+];
+
+const evidencePacket = [
+  { kind: 'Source', id: 'SRC-2309-A17', label: 'NVDA initiation memo', state: 'quoted' },
+  { kind: 'Source', id: 'DST-2405-C12', label: 'ASIC dissent thread', state: 'vindicated' },
+  { kind: 'Method', id: 'LIN-0042', label: 'Principle lineage map', state: 'replayable' },
+  { kind: 'Lifecycle', id: 'RET-2601', label: 'Retired belief event', state: 'active warning' },
+];
+
+const executiveSignals = [
+  {
+    id: 'SIG-01',
+    label: 'Live echo',
+    text: 'The current allocation memo repeats PRI-0042, a retired margin-durability belief superseded by three post-mortems.',
+  },
+  {
+    id: 'SIG-02',
+    label: 'Dissent credit',
+    text: 'J. Okafor flagged hyperscaler silicon pressure fourteen months before it entered the official base case.',
+  },
+  {
+    id: 'SIG-03',
+    label: 'Calibration drag',
+    text: 'High-conviction infrastructure calls from D. Park resolved below stated odds; new calls should be discounted until recalibrated.',
+  },
+];
+
+const timeline = [
+  { when: '2023-Q3', record: 'NVDA initiation memo', event: 'Demand-supply thesis and CUDA moat assumption captured from SRC-2309-A17.' },
+  { when: '2024-Q2', record: 'IC dissent thread', event: 'J. Okafor records ASIC-compression dissent against the consensus view.' },
+  { when: '2025-Q3', record: 'Quarterly review', event: 'Dissent resolves correct as hyperscaler silicon becomes a gross-margin headwind.' },
+  { when: '2026-Q1', record: 'Post-mortem bundle', event: 'PRI-0042 is retired and replaced by a narrower margin-cycle principle.' },
+];
+
+const citedClaims = [
+  { claim: 'GPU supply remained constrained into 2024-Q4.', source: 'SRC-2309-A17: 14-22', status: 'resolved true' },
+  { claim: 'Margin durability was overstated in high-conviction notes.', source: 'PM-2601-B03: 31-48', status: 'retired principle' },
+  { claim: 'ASIC pressure was recorded before entering the base case.', source: 'DST-2405-C12: 08-19', status: 'vindicated dissent' },
+];
+
+const recommendations = [
+  'Require a contradiction check before increasing AI-infrastructure concentration.',
+  'Discount D. Park high-conviction forecasts by the observed calibration penalty until two quarters improve.',
+  'Promote J. Okafor dissent records into pre-IC packet reviews when silicon economics appear in a thesis.',
+];
+---
+<BaseLayout
+  title="Meridian Decision Memory Report - Memric"
+  description="A sample Memric Decision Memory Report showing cited claims, prediction calibration, dissent tracking, lineage, and open contradictions."
+>
+  <div id="top"></div>
+  <Nav home={false} />
+  <main id="main" class="overflow-x-hidden bg-paper">
+    <section class="border-b border-ink bg-ink text-paper">
+      <div class="mx-auto max-w-[1320px] px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
+        <a href="/" class="inline-flex border border-white/30 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] text-white/72 no-underline transition-colors hover:border-white hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper">Back to Memric</a>
+        <div class="mt-12 grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+          <div data-reveal>
+            <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Illustrative Meridian artifact</p>
+            <h1 class="font-display mt-4 max-w-[10ch] text-[54px] font-semibold leading-[0.9] tracking-normal sm:text-[82px] lg:text-[108px]">Decision Memory Report</h1>
+          </div>
+          <div class="max-w-[68ch]" data-reveal style="--reveal-delay: 120ms">
+            <p class="text-[19px] leading-[1.65] text-white/76">
+              This is the kind of inspectable report Memric produces from a firm's own IC memos, post-mortems, letters, and meeting notes. Every assertion below is presented as a ledger claim with source lineage, confidence, and lifecycle status.
+            </p>
+            <div class="mt-7 grid grid-cols-2 gap-px border border-white/30 bg-white/30 sm:grid-cols-4">
+              {reportStats.map((stat) => (
+                <div class="bg-ink px-4 py-3">
+                  <p class="font-display text-[34px] leading-none text-paper">{stat.value}</p>
+                  <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.08em] text-white/48">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="summary" class="border-b border-ink bg-sectionpaper">
+      <div class="mx-auto grid max-w-[1320px] gap-px bg-ink px-5 py-10 sm:px-8 lg:grid-cols-[0.55fr_1fr] lg:px-12">
+        <aside class="report-index bg-paper p-5 sm:p-7 lg:sticky lg:top-24 lg:self-start lg:p-8" data-reveal>
+          <div class="flex items-start justify-between gap-4 border-b border-ink/15 pb-4">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">Report control</p>
+              <h2 class="font-display mt-2 text-[28px] font-semibold leading-tight tracking-normal">Audit path</h2>
+            </div>
+            <span class="border border-accent px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-accent">v1</span>
+          </div>
+          <nav class="mt-5" aria-label="Decision Memory Report sections">
+            <ol role="list" class="grid gap-px border border-hairline bg-hairline">
+              {reportNav.map((item) => (
+                <li>
+                  <a href={item.href} data-report-target={item.href.slice(1)} class="report-index-link grid grid-cols-[38px_1fr] bg-viz px-3 py-3 text-ink no-underline">
+                    <span class="font-mono text-[10px] text-gutter">{item.n}</span>
+                    <span class="text-[13px] font-semibold leading-snug">{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <div class="mt-6">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">Evidence packet</p>
+            <div class="mt-3 grid gap-px border border-hairline bg-hairline">
+              {evidencePacket.map((item) => (
+                <div class="evidence-packet-item bg-paper px-3 py-3">
+                  <div class="flex items-baseline justify-between gap-3">
+                    <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-caption">{item.kind}</span>
+                    <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{item.state}</span>
+                  </div>
+                  <p class="mt-2 font-mono text-[11px] text-gutter">{item.id}</p>
+                  <p class="mt-1 text-[13px] font-semibold leading-snug text-ink">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+        <div class="bg-paper p-5 sm:p-7 lg:p-8" data-reveal style="--reveal-delay: 120ms">
+          <div class="flex items-start justify-between gap-5 border-b border-ink/15 pb-5">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">Executive summary</p>
+              <h2 class="font-display mt-2 text-[34px] font-semibold leading-tight tracking-normal">Three signals that should change the next IC packet.</h2>
+            </div>
+            <span class="hidden border border-accent px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-accent sm:inline-flex">sample</span>
+          </div>
+          <div class="mt-5 grid gap-4 lg:grid-cols-3">
+            {executiveSignals.map((signal) => (
+              <article class="reveal-card border border-hairline bg-viz p-4">
+                <div class="flex items-baseline justify-between gap-4">
+                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-gutter">{signal.id}</span>
+                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{signal.label}</span>
+                </div>
+                <p class="mt-4 text-[14px] leading-relaxed text-bodytext">{signal.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="border-b border-ink">
+      <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 lg:px-12">
+        <div class="chapter-grid">
+          <div data-reveal>
+            <p class="chapter-kicker font-mono text-[11px] uppercase tracking-[0.12em] text-graytext">01 / timeline</p>
+          </div>
+          <div data-reveal style="--reveal-delay: 120ms">
+            <h2 class="font-display text-[42px] font-semibold leading-tight tracking-normal">Judgment is treated as a record, not a vibe.</h2>
+            <ol role="list" class="mt-8 border border-ink bg-ink">
+              {timeline.map((item) => (
+                <li class="grid gap-px border-b border-ink last:border-b-0 md:grid-cols-[140px_210px_1fr]">
+                  <div class="bg-viz px-4 py-4 font-mono text-[11px] uppercase tracking-[0.08em] text-gutter">{item.when}</div>
+                  <div class="bg-paper px-4 py-4 text-[14px] font-semibold text-ink">{item.record}</div>
+                  <div class="bg-paper px-4 py-4 text-[14px] leading-relaxed text-caption">{item.event}</div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calibration" class="border-b border-ink bg-sectionpaper">
+      <div class="mx-auto grid max-w-[1320px] gap-px bg-ink px-5 py-16 sm:px-8 lg:grid-cols-2 lg:px-12">
+        <article class="min-w-0 bg-paper p-5 sm:p-7" data-reveal>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">02 / prediction calibration</p>
+          <h2 class="font-display mt-3 text-[34px] font-semibold leading-tight tracking-normal">Forecast confidence is compared with outcomes by author.</h2>
+          <p class="mt-4 max-w-[56ch] text-[15px] leading-relaxed text-caption">Memric keeps the names attached to forecasts so the firm can see who is well-calibrated, who is early, and where conviction outruns evidence.</p>
+          <div class="mt-6 min-w-0 overflow-x-auto border border-hairline bg-viz">
+            <CalibrationChart />
+          </div>
+        </article>
+        <article class="min-w-0 bg-paper p-5 sm:p-7" data-reveal style="--reveal-delay: 120ms">
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">03 / retired belief</p>
+          <h2 class="font-display mt-3 text-[34px] font-semibold leading-tight tracking-normal">The old rule is not deleted. It is retired with receipts.</h2>
+          <p class="mt-4 max-w-[56ch] text-[15px] leading-relaxed text-caption">A retired principle remains searchable, linked, and available as a warning whenever a new memo starts to repeat it.</p>
+          <div class="mt-6 border border-hairline bg-viz">
+            <BeliefDiff />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="dissent" class="border-b border-ink">
+      <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 lg:px-12">
+        <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div data-reveal>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">04 / dissent analysis</p>
+            <h2 class="font-display mt-3 max-w-[13ch] text-[42px] font-semibold leading-tight tracking-normal">The person who was early becomes part of the system.</h2>
+            <p class="mt-5 max-w-[58ch] text-[16px] leading-relaxed text-caption">The report does not flatten disagreement into consensus. It preserves who disagreed, when, against which assumption, and what later evidence did to that view.</p>
+          </div>
+          <div class="border border-ink bg-viz" data-reveal style="--reveal-delay: 120ms">
+            <DissentTimeline />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lineage" class="border-b border-ink bg-ink text-paper">
+      <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 lg:px-12">
+        <div class="grid gap-px bg-white/20 border border-white/20 lg:grid-cols-[1.1fr_0.9fr]">
+          <article class="min-w-0 bg-paper p-5 text-ink sm:p-7" data-reveal>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">05 / lineage</p>
+            <h2 class="font-display mt-3 text-[34px] font-semibold leading-tight tracking-normal">Every conclusion keeps its source chain attached.</h2>
+            <div class="mt-6 min-w-0 overflow-x-auto border border-hairline bg-viz">
+              <LineageGraph />
+            </div>
+          </article>
+          <article class="min-w-0 bg-paper p-5 text-ink sm:p-7" data-reveal style="--reveal-delay: 120ms">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">06 / contradiction</p>
+            <h2 class="font-display mt-3 text-[34px] font-semibold leading-tight tracking-normal">Active principles are tested against one another.</h2>
+            <div class="mt-6 min-h-[210px] border border-hairline bg-viz">
+              <ContradictionPair />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="claims" class="border-b border-ink bg-sectionpaper">
+      <div class="mx-auto grid max-w-[1320px] gap-px bg-ink px-5 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-12">
+        <article id="recommendations" class="bg-paper p-5 sm:p-7" data-reveal>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">07 / cited claims</p>
+          <h2 class="font-display mt-3 text-[34px] font-semibold leading-tight tracking-normal">Claims are readable because their evidence is not hidden.</h2>
+          <div class="mt-6 grid gap-px border border-hairline bg-hairline">
+            {citedClaims.map((item) => (
+              <div class="grid gap-0 bg-viz md:grid-cols-[1fr_170px_150px]">
+                <p class="px-4 py-3 text-[14px] leading-relaxed text-bodytext">{item.claim}</p>
+                <p class="border-t border-hairline px-4 py-3 font-mono text-[11px] text-caption md:border-l md:border-t-0">{item.source}</p>
+                <p class="border-t border-hairline px-4 py-3 font-mono text-[11px] uppercase tracking-[0.06em] text-accent md:border-l md:border-t-0">{item.status}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+        <article class="bg-paper p-5 sm:p-7" data-reveal style="--reveal-delay: 120ms">
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-graytext">08 / recommendations</p>
+          <h2 class="font-display mt-3 text-[34px] font-semibold leading-tight tracking-normal">The report ends with operating changes, not applause.</h2>
+          <ol role="list" class="mt-6 grid gap-px border border-ink bg-ink">
+            {recommendations.map((item, index) => (
+              <li class="grid grid-cols-[48px_1fr] bg-paper">
+                <span class="bg-viz px-4 py-4 font-mono text-[11px] text-gutter">{String(index + 1).padStart(2, '0')}</span>
+                <span class="px-4 py-4 text-[14px] leading-relaxed text-bodytext">{item}</span>
+              </li>
+            ))}
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="bg-paper">
+      <div class="mx-auto max-w-[1320px] px-5 py-14 sm:px-8 lg:px-12">
+        <div class="flex flex-col justify-between gap-5 border border-ink bg-ink p-5 text-paper sm:flex-row sm:items-center sm:p-7" data-reveal>
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/48">Meridian is illustrative</p>
+            <p class="mt-2 max-w-[66ch] text-[15px] leading-relaxed text-white/72">A real engagement replaces this fictional corpus with your firm's documents and keeps the generated ledger running after the report.</p>
+          </div>
+          <a href="mailto:jin@memric.ai" class="shrink-0 bg-paper px-[22px] py-[13px] text-[14px] font-medium text-ink no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper">Discuss an audit</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const reportLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-report-target]'));
+  const reportPairs = reportLinks
+    .map((link) => {
+      const section = document.getElementById(link.dataset.reportTarget ?? '');
+      return section ? { link, section } : null;
+    })
+    .filter((pair): pair is { link: HTMLAnchorElement; section: HTMLElement } => pair !== null);
+
+  let reportTicking = false;
+
+  const updateReportIndex = () => {
+    const markerY = window.innerHeight * 0.34;
+    const hashTarget = window.location.hash.slice(1);
+    let activePair = reportPairs.find((pair) => pair.section.id === hashTarget) ?? reportPairs[0];
+
+    reportPairs.forEach((pair) => {
+      if (pair.section.getBoundingClientRect().top <= markerY) {
+        activePair = pair;
+      }
+    });
+
+    reportPairs.forEach((pair) => {
+      const active = pair === activePair;
+      pair.link.classList.toggle('is-current', active);
+      if (active) {
+        pair.link.setAttribute('aria-current', 'location');
+      } else {
+        pair.link.removeAttribute('aria-current');
+      }
+    });
+
+    reportTicking = false;
+  };
+
+  const requestReportIndexUpdate = () => {
+    if (reportTicking) return;
+    window.requestAnimationFrame(updateReportIndex);
+    reportTicking = true;
+  };
+
+  if (reportPairs.length > 0) {
+    updateReportIndex();
+    window.addEventListener('scroll', requestReportIndexUpdate, { passive: true });
+    window.addEventListener('hashchange', () => {
+      window.setTimeout(requestReportIndexUpdate, 80);
+    });
+    window.addEventListener('resize', requestReportIndexUpdate);
+    window.setTimeout(requestReportIndexUpdate, 250);
+  }
+</script>

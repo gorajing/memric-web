@@ -1,0 +1,81 @@
+---
+const markers = [
+  { href: '#ledger', label: 'Ledger', n: '00' },
+  { href: '#proof', label: 'Proof', n: '01' },
+  { href: '#surfaces', label: 'Surfaces', n: '02' },
+  { href: '#audit', label: 'Audit', n: '03' },
+  { href: '#contact', label: 'Contact', n: '04' },
+];
+---
+<nav class="page-rail hidden xl:block" aria-label="Page sections" data-page-rail>
+  <ol role="list" class="grid gap-3">
+    {markers.map((marker) => (
+      <li>
+        <a
+          href={marker.href}
+          class="page-rail-link group flex items-center justify-end gap-2 no-underline"
+          data-rail-target={marker.href.slice(1)}
+        >
+          <span class="page-rail-label font-mono text-[9px] uppercase tracking-[0.08em] text-caption opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            {marker.n} {marker.label}
+          </span>
+          <span class="page-rail-dot" aria-hidden="true"></span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  const rails = Array.from(document.querySelectorAll<HTMLElement>('[data-page-rail]'));
+  const railLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-rail-target]'));
+  const railPairs = railLinks
+    .map((link) => {
+      const section = document.getElementById(link.dataset.railTarget ?? '');
+      return section ? { link, section } : null;
+    })
+    .filter((pair): pair is { link: HTMLAnchorElement; section: HTMLElement } => pair !== null);
+
+  let railTicking = false;
+
+  const updatePageRail = () => {
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const progress = Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100));
+    const markerY = window.innerHeight * 0.52;
+    let activePair: (typeof railPairs)[number] | undefined;
+
+    rails.forEach((rail) => {
+      rail.style.setProperty('--rail-progress', `${progress}%`);
+    });
+
+    railPairs.forEach((pair) => {
+      if (pair.section.getBoundingClientRect().top <= markerY) {
+        activePair = pair;
+      }
+    });
+
+    railPairs.forEach((pair) => {
+      const active = activePair ? pair === activePair : false;
+      pair.link.classList.toggle('is-current', active);
+      if (active) {
+        pair.link.setAttribute('aria-current', 'location');
+      } else {
+        pair.link.removeAttribute('aria-current');
+      }
+    });
+
+    railTicking = false;
+  };
+
+  const requestPageRailUpdate = () => {
+    if (railTicking) return;
+    window.requestAnimationFrame(updatePageRail);
+    railTicking = true;
+  };
+
+  if (railPairs.length > 0) {
+    updatePageRail();
+    window.addEventListener('scroll', requestPageRailUpdate, { passive: true });
+    window.addEventListener('resize', requestPageRailUpdate);
+  }
+</script>

@@ -1,92 +1,224 @@
 ---
-// Capabilities — Section 03 "What Memric surfaces"
-// 2×2 grid of four cards, each with a typed artifact visualization
-// Ported from capabilities-visuals-v2.html
 import CalibrationChart from './viz/CalibrationChart.astro';
 import BeliefDiff from './viz/BeliefDiff.astro';
 import DissentTimeline from './viz/DissentTimeline.astro';
 import ContradictionPair from './viz/ContradictionPair.astro';
+
+const questions = [
+  {
+    id: 'calibration',
+    n: '01',
+    label: 'Prediction memory',
+    question: 'Which partners are calibrated?',
+    signal: 'D. Park overstates high-conviction infrastructure calls by +1.6 sigma.',
+  },
+  {
+    id: 'belief',
+    n: '02',
+    label: 'Belief lifecycle',
+    question: 'Which beliefs quietly expired?',
+    signal: 'PRI-0042 was retired after three post-mortems contradicted it.',
+  },
+  {
+    id: 'dissent',
+    n: '03',
+    label: 'Dissent memory',
+    question: 'Who was right before consensus moved?',
+    signal: 'J. Okafor was fourteen months early on ASIC margin compression.',
+  },
+  {
+    id: 'contradiction',
+    n: '04',
+    label: 'Live contradiction',
+    question: 'Are we repeating an old mistake?',
+    signal: 'A live proposal repeats a retired concentration assumption before IC.',
+  },
+];
 ---
-<section id="surfaces" aria-labelledby="surfaces-heading" class="border-t border-hairline">
-  <div class="mx-auto max-w-[1180px] px-6 sm:px-10 lg:px-14 py-20">
-  <!-- Section header -->
-  <p class="font-mono text-[11px] tracking-[0.06em] uppercase text-accent mb-4">
-    What Memric surfaces
-  </p>
-  <h2 id="surfaces-heading" class="text-[26px] sm:text-[34px] font-semibold tracking-[-0.03em] max-w-[18ch] text-ink">
-    Four things your firm can't see today.
-  </h2>
-  <p class="text-[16px] text-bodytext mt-[14px] max-w-[60ch]">
-    Each is a typed, lineage-traced record — not a summary. Here's what each one looks like, on real material.
-  </p>
-
-  <!-- 2×2 grid: gap-px bg-hairline creates the hairline dividers between cards -->
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 mt-10 border border-ink gap-px bg-hairline"
-  >
-    <!-- Card 01: Calibration -->
-    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
-      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
-        01 / Predictions vs. outcomes
-      </p>
-      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
-        Calibration, per author
-      </h3>
-      <div class="h-[192px] border border-hairline bg-viz relative overflow-x-auto" tabindex="0" role="region" aria-label="Calibration chart (scrollable)">
-        <CalibrationChart />
+<section id="surfaces" aria-labelledby="surfaces-heading" class="border-t border-ink/80 bg-paper">
+  <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+    <div class="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end" data-reveal>
+      <div>
+        <p class="font-mono text-[11px] tracking-[0.12em] uppercase text-accent mb-4">
+          Four questions
+        </p>
+        <h2 id="surfaces-heading" class="font-display text-balance text-[40px] sm:text-[58px] font-semibold tracking-normal leading-[0.96] max-w-[12ch] text-ink">
+          Memric answers the CIO's actual fear.
+        </h2>
       </div>
-      <p class="text-[13px] text-caption leading-[1.5] mt-4">
-        Every prediction, scored against what actually happened. The chronically overconfident show up immediately — by name.
+      <p class="max-w-[58ch] text-[17px] leading-[1.7] text-pretty text-bodytext lg:pb-4">
+        Each artifact answers a question that normally requires institutional memory, luck, or the one partner who happened to remember.
       </p>
     </div>
 
-    <!-- Card 02: Belief Diff -->
-    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
-      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
-        02 / Principle lifecycle
-      </p>
-      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
-        Beliefs that retire when superseded
-      </h3>
-      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
-        <BeliefDiff />
-      </div>
-      <p class="text-[13px] text-caption leading-[1.5] mt-4">
-        The supersession is the record. You can always replay what you believed and why it changed.
-      </p>
-    </div>
+    <div class="question-cockpit mt-8 border border-ink bg-ink sm:mt-10" data-question-cockpit data-reveal style="--reveal-delay: 120ms">
+      <div class="grid gap-px lg:grid-cols-[0.46fr_1fr]">
+        <aside class="bg-ink p-4 text-paper sm:p-5" aria-label="Decision cockpit question selector">
+          <div class="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/48">Decision cockpit</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-accent">4 live views</p>
+          </div>
+          <div class="mt-4 grid gap-2" role="tablist" aria-label="Buyer questions" aria-orientation="vertical">
+            {questions.map((item, index) => (
+              <button
+                id={`question-tab-${item.id}`}
+                type="button"
+                role="tab"
+                aria-selected={index === 0 ? 'true' : 'false'}
+                aria-controls={`question-panel-${item.id}`}
+                tabindex={index === 0 ? '0' : '-1'}
+                data-question-trigger={item.id}
+                class={`question-button ${index === 0 ? 'is-active' : ''} border border-white/15 bg-white/[0.04] px-4 py-4 text-left text-paper`}
+              >
+                <span class="flex items-baseline justify-between gap-4">
+                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-white/42">{item.n} / {item.label}</span>
+                  <span class="question-button-mark" aria-hidden="true"></span>
+                </span>
+                <span class="mt-3 block font-display text-[24px] font-semibold leading-tight tracking-normal">{item.question}</span>
+                <span data-question-signal class="mt-3 block text-[12.5px] leading-relaxed text-white/58">{item.signal}</span>
+              </button>
+            ))}
+          </div>
+        </aside>
 
-    <!-- Card 03: Dissent Timeline -->
-    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
-      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
-        03 / Dissent analysis
-      </p>
-      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
-        Who pushed back — and was right
-      </h3>
-      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
-        <DissentTimeline />
-      </div>
-      <p class="text-[13px] text-caption leading-[1.5] mt-4">
-        Dissent is captured at the moment it's voiced, then matched to outcomes. Correct contrarians become visible.
-      </p>
-    </div>
+        <div class="bg-paper p-4 sm:p-6">
+          <article id="question-panel-calibration" role="tabpanel" aria-labelledby="question-tab-calibration" data-question-panel="calibration" class="question-panel is-active">
+            <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
+              <div>
+                <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+                  01 / Prediction memory
+                </p>
+                <h3 class="font-display text-[34px] font-semibold tracking-normal leading-tight text-ink">
+                  Which partners are calibrated?
+                </h3>
+                <p class="text-[14px] text-caption leading-[1.6] mt-4">
+                  Every forecast is carried forward to outcome. Patterned overconfidence becomes visible by author, sector, and time horizon.
+                </p>
+              </div>
+              <div class="min-h-[250px] border border-hairline bg-viz relative overflow-x-auto" tabindex="0" role="region" aria-label="Calibration chart (scrollable)">
+                <CalibrationChart />
+              </div>
+            </div>
+          </article>
 
-    <!-- Card 04: Contradiction Pair -->
-    <div class="bg-paper px-[28px] pt-[26px] pb-[28px]">
-      <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
-        04 / Open contradictions
-      </p>
-      <h3 class="text-[17px] font-semibold tracking-[-0.01em] mb-[18px] text-ink">
-        Live beliefs that can't both be true
-      </h3>
-      <div class="h-[172px] border border-hairline bg-viz relative overflow-hidden">
-        <ContradictionPair />
+          <article id="question-panel-belief" role="tabpanel" aria-labelledby="question-tab-belief" data-question-panel="belief" class="question-panel">
+            <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
+              <div>
+                <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+                  02 / Belief lifecycle
+                </p>
+                <h3 class="font-display text-[34px] font-semibold tracking-normal leading-tight text-ink">
+                  Which beliefs quietly expired?
+                </h3>
+                <p class="text-[14px] text-caption leading-[1.6] mt-4">
+                  A retired principle is not deleted. It becomes a dated record of what the firm believed and the evidence that changed it.
+                </p>
+              </div>
+              <div class="min-h-[250px] border border-hairline bg-viz relative overflow-hidden">
+                <BeliefDiff />
+              </div>
+            </div>
+          </article>
+
+          <article id="question-panel-dissent" role="tabpanel" aria-labelledby="question-tab-dissent" data-question-panel="dissent" class="question-panel">
+            <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
+              <div>
+                <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+                  03 / Dissent memory
+                </p>
+                <h3 class="font-display text-[34px] font-semibold tracking-normal leading-tight text-ink">
+                  Who was right before consensus moved?
+                </h3>
+                <p class="text-[14px] text-caption leading-[1.6] mt-4">
+                  Dissent is captured when it is unpopular, then resolved later against outcomes. Correct contrarians stop being invisible.
+                </p>
+              </div>
+              <div class="min-h-[250px] border border-hairline bg-viz relative overflow-hidden">
+                <DissentTimeline />
+              </div>
+            </div>
+          </article>
+
+          <article id="question-panel-contradiction" role="tabpanel" aria-labelledby="question-tab-contradiction" data-question-panel="contradiction" class="question-panel">
+            <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
+              <div>
+                <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
+                  04 / Live contradiction
+                </p>
+                <h3 class="font-display text-[34px] font-semibold tracking-normal leading-tight text-ink">
+                  Are we repeating an old mistake?
+                </h3>
+                <p class="text-[14px] text-caption leading-[1.6] mt-4">
+                  Live proposals are compared against the firm's own retired assumptions before the next IC meeting, not in the post-mortem.
+                </p>
+              </div>
+              <div class="min-h-[250px] border border-hairline bg-viz relative overflow-hidden">
+                <ContradictionPair />
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
-      <p class="text-[13px] text-caption leading-[1.5] mt-4">
-        Two principles, both currently active, mutually exclusive. Surfaced before the next IC meeting — not after.
-      </p>
     </div>
-  </div>
   </div>
 </section>
+
+<script>
+  const questionCockpits = document.querySelectorAll<HTMLElement>('[data-question-cockpit]');
+
+  questionCockpits.forEach((cockpit) => {
+    const triggers = Array.from(cockpit.querySelectorAll<HTMLElement>('[data-question-trigger]'));
+    const panels = Array.from(cockpit.querySelectorAll<HTMLElement>('[data-question-panel]'));
+
+    cockpit.classList.add('is-enhanced');
+
+    const setActiveQuestion = (key: string | undefined) => {
+      if (!key) return;
+
+      triggers.forEach((trigger) => {
+        const active = trigger.dataset.questionTrigger === key;
+        trigger.classList.toggle('is-active', active);
+        trigger.setAttribute('aria-selected', String(active));
+        trigger.setAttribute('tabindex', active ? '0' : '-1');
+      });
+
+      panels.forEach((panel) => {
+        const active = panel.dataset.questionPanel === key;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('mouseenter', () => setActiveQuestion(trigger.dataset.questionTrigger));
+      trigger.addEventListener('focus', () => setActiveQuestion(trigger.dataset.questionTrigger));
+      trigger.addEventListener('click', () => setActiveQuestion(trigger.dataset.questionTrigger));
+      trigger.addEventListener('keydown', (event) => {
+        const currentIndex = triggers.indexOf(trigger);
+        const lastIndex = triggers.length - 1;
+        let nextIndex: number | undefined;
+
+        if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+          nextIndex = currentIndex === lastIndex ? 0 : currentIndex + 1;
+        } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+          nextIndex = currentIndex === 0 ? lastIndex : currentIndex - 1;
+        } else if (event.key === 'Home') {
+          nextIndex = 0;
+        } else if (event.key === 'End') {
+          nextIndex = lastIndex;
+        }
+
+        if (nextIndex === undefined) return;
+
+        event.preventDefault();
+        const nextTrigger = triggers[nextIndex];
+        setActiveQuestion(nextTrigger?.dataset.questionTrigger);
+        nextTrigger?.focus();
+      });
+    });
+
+    if (triggers[0]?.dataset.questionTrigger) {
+      setActiveQuestion(triggers[0].dataset.questionTrigger);
+    }
+  });
+</script>
