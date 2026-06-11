@@ -10,6 +10,8 @@ import '@fontsource/newsreader/latin-500.css';
 import '@fontsource/newsreader/latin-600.css';
 import '@fontsource/newsreader/latin-700.css';
 import '../styles/global.css';
+import newsreader600Url from '@fontsource/newsreader/files/newsreader-latin-600-normal.woff2?url';
+import inter400Url from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -27,6 +29,8 @@ const ogImageUrl = new URL('/og.png', canonicalUrl).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={newsreader600Url} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter400Url} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
