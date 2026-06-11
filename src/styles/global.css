@@ -178,6 +178,54 @@ body::before {
   text-wrap: balance;
 }
 
+/* Scene 1 — the hero forgets. Sentence 2 drains from ink to struck gray in
+   character-quantized steps as the headline exits the viewport, and the
+   strikethrough lands in the final stretch. Pure CSS scroll timeline: the text
+   stays one selectable node; Firefox / reduced-motion / no-JS get crisp ink. */
+@property --forget-p {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: true;
+}
+
+@keyframes forget-drain {
+  from {
+    --forget-p: 0%;
+  }
+  to {
+    --forget-p: 100%;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* outer span drives the timeline; --forget-p inherits to the inner span */
+    .hero-forget {
+      animation: forget-drain steps(26, end) both;
+      animation-timeline: scroll();
+      animation-range: 0 50vh;
+    }
+
+    /* inner span: ink → struck drain, plus a strike band that draws with it.
+       No text-decoration anywhere — background-clip: text clips through
+       decoration geometry, painting the background as a fake solid strike.
+       Layer 1 (the strike) is sized by --forget-p and tiles per line (1lh)
+       so wrapped lines each get their own strike. */
+    .hero-forget-text {
+      background-image:
+        linear-gradient(180deg, transparent 0 50%, #6f6f6f 50% 57%, transparent 57%),
+        linear-gradient(90deg, var(--color-struck) var(--forget-p), var(--color-ink) var(--forget-p));
+      background-size:
+        var(--forget-p) 1lh,
+        100% 100%;
+      background-repeat: repeat-y, no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+}
+
 .audit-panel {
   box-shadow: 0 28px 70px rgba(17, 17, 17, 0.12);
 }
