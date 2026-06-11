@@ -6,9 +6,10 @@ interface Props {
 const { home = true } = Astro.props;
 const links = [
   { label: 'Proof', href: '#proof' },
-  { label: 'Surfaces', href: '#surfaces', mobileHidden: true },
+  { label: 'Surfaces', href: '#surfaces' },
   { label: 'Audit', href: '#audit' },
-  { label: 'Report', href: '/meridian-report/', mobileHidden: true, absolute: true },
+  { label: 'Trust', href: '#trust' },
+  { label: 'Report', href: '/meridian-report/', absolute: true },
   { label: 'Contact', href: '#contact', accent: true },
 ];
 
@@ -20,12 +21,12 @@ const sectionHref = (link: typeof links[number]) => {
 <nav aria-label="Site" class="site-nav sticky top-0 z-40 border-b border-ink/80 bg-paper/90 backdrop-blur-md" style="--nav-progress: 0%">
   <div class="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12 flex items-center justify-between py-4">
     <a href={home ? '#top' : '/'} class="font-display text-[22px] font-bold tracking-normal text-ink no-underline">Memric</a>
-    <div class="flex flex-wrap justify-end gap-x-3 gap-y-1 sm:gap-x-6 text-[12px] sm:text-[13px]">
+    <div class="flex flex-wrap justify-end gap-x-4 gap-y-2 sm:gap-x-6 text-[11px] sm:text-[13px]">
       {links.map((l) => (
         <a
           href={sectionHref(l)}
           data-section-target={l.absolute ? undefined : l.href.slice(1)}
-          class={`nav-link font-mono uppercase tracking-[0.08em] no-underline transition-colors hover:text-accent ${l.mobileHidden ? 'hidden sm:inline' : ''} ${l.accent ? 'text-accent' : 'text-ink'}`}
+          class={`nav-link inline-block py-1.5 font-mono uppercase tracking-[0.08em] no-underline transition-colors hover:text-accent ${l.accent ? 'text-accent' : 'text-ink'}`}
         >{l.label}</a>
       ))}
     </div>

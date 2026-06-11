@@ -10,6 +10,7 @@ test('nav renders the wordmark and section anchors', async () => {
   expect(html).toContain('href="#audit"');
   expect(html).toContain('href="#contact"');
   expect(html).toContain('href="#surfaces"');
+  expect(html).toContain('href="#trust"');
   expect(html).toContain('href="/meridian-report/"');
   expect(html).toContain('data-section-target="proof"');
   expect(html).toContain('nav-progress');

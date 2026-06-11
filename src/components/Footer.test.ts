@@ -7,7 +7,6 @@ test('footer closes with the audit CTA, sample report, and memory signals', asyn
   const html = await container.renderToString(Footer);
   expect(html).toContain('next memo argue');
   expect(html).toContain('/meridian-report/');
-  expect(html).toContain('https://github.com/gorajing/memric');
   expect(html).toContain('mailto:jin@memric.ai');
   expect(html).toContain('Memric%20Decision%20Memory%20Audit');
   expect(html).toContain('prediction');

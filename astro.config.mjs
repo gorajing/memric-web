@@ -8,5 +8,5 @@ export default defineConfig({
   site: 'https://memric.ai',
   output: 'static',
   vite: { plugins: [tailwindcss()] },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/fresh') })],
 });

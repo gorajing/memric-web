@@ -6,9 +6,10 @@
   --color-sectionpaper: #eef2ef;
   --color-viz: #fffefa;
   --color-hairline: #d8ddd7;
-  --color-graytext: #707770;
+  --color-graytext: #666c66;
   --color-gutter: #b8c0b7;
-  --color-accent: #d42a1f;
+  --color-accent: #c8281d;
+  --color-accentbright: #ff5a4d;
   --color-redtint: #fdeceb;
   --color-correct: #176946;
   --color-greentint: #e8f1e8;
@@ -275,7 +276,7 @@ body::before {
 }
 
 .ledger-source {
-  color: var(--color-struck);
+  color: var(--color-caption);
 }
 
 .state-source {

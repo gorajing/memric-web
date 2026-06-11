@@ -34,6 +34,9 @@ const auditSteps = [
         <p class="font-mono text-[11px] tracking-[0.12em] uppercase text-accent mb-4">Contact</p>
         <h2 id="contact-heading" class="font-display text-balance text-[44px] sm:text-[72px] font-semibold tracking-normal leading-[0.92] max-w-[14ch]">If judgment is trapped in old documents, build the ledger.</h2>
         <p class="mt-5 max-w-[58ch] text-[17px] leading-[1.7] text-pretty text-bodytext">Start with a representative corpus. Four weeks later, keep the Decision Memory Report and a Memric instance you can replay against every source.</p>
+        <div class="mt-7 max-w-[52ch] border-l-2 border-ink pl-4">
+          <p class="text-[14px] leading-[1.65] text-caption">Memric is built and run by <strong class="font-semibold text-ink">Jin Choi</strong>. On an audit, you work directly with the person who built the engine.</p>
+        </div>
       </div>
 
       <div class="contact-packet border border-ink bg-ink p-1 text-paper" data-reveal style="--reveal-delay: 140ms">
@@ -60,7 +63,7 @@ const auditSteps = [
           <ol role="list" class="grid gap-px bg-white/20 md:grid-cols-3">
             {auditSteps.map((step) => (
               <li class="bg-ink p-5">
-                <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/45">{step.week}</p>
+                <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/55">{step.week}</p>
                 <h4 class="mt-3 text-[15px] font-semibold text-paper">{step.title}</h4>
                 <p class="mt-2 text-[13px] leading-relaxed text-white/62">{step.detail}</p>
               </li>
@@ -70,7 +73,6 @@ const auditSteps = [
           <div class="flex flex-col gap-3 bg-paper p-5 text-ink sm:flex-row sm:flex-wrap sm:items-center sm:p-6">
             <a href={auditMailto} class="inline-block bg-ink text-paper px-6 py-3.5 text-[15px] font-medium no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Start audit brief</a>
             <a href="/meridian-report/" class="inline-block border border-ink text-ink px-6 py-3.5 text-[15px] font-medium no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Inspect sample</a>
-            <a href="https://github.com/gorajing/memric" class="inline-block border border-ink text-ink px-6 py-3.5 text-[15px] font-medium no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">View GitHub</a>
           </div>
         </div>
       </div>

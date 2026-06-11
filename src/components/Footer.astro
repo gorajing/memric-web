@@ -3,7 +3,6 @@ const auditSubject = encodeURIComponent('Memric Decision Memory Audit');
 const auditHref = `mailto:jin@memric.ai?subject=${auditSubject}`;
 const links = [
   { label: 'Sample report', href: '/meridian-report/' },
-  { label: 'GitHub', href: 'https://github.com/gorajing/memric' },
   { label: 'Email', href: auditHref },
 ];
 
@@ -20,7 +19,7 @@ const memorySignals = [
   <div class="mx-auto max-w-[1320px] px-5 py-10 sm:px-8 lg:px-12">
     <div class="grid gap-8 border-b border-white/15 pb-9 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
       <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Memric</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-accentbright">Memric</p>
         <h2 class="font-display mt-4 max-w-[13ch] text-balance text-[44px] font-semibold leading-[0.94] tracking-normal text-paper sm:text-[64px]">
           Make the next memo argue with the firm's past.
         </h2>
@@ -28,12 +27,12 @@ const memorySignals = [
 
       <div class="grid gap-px border border-white/20 bg-white/20">
         <div class="bg-ink px-4 py-4">
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/42">Final check</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/55">Final check</p>
           <p class="mt-2 text-[15px] leading-relaxed text-white/72">
             If a belief, forecast, or dissent shaped capital allocation, it should be inspectable when the next decision rhymes.
           </p>
         </div>
-        <div class="grid gap-px bg-white/20 sm:grid-cols-3">
+        <div class="grid gap-px bg-white/20 sm:grid-cols-2">
           {links.map((link) => (
             <a
               href={link.href}
@@ -46,17 +45,17 @@ const memorySignals = [
       </div>
     </div>
 
-    <div class="ticker py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-white/44" aria-label="Memory signal tape">
+    <div class="ticker py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-white/55" aria-label="Memory signal tape">
       <div class="ticker-track">
         {[...memorySignals, ...memorySignals, ...memorySignals].map((signal) => (
-          <span class="mx-5 inline-flex items-center gap-5"><span class="text-accent">+</span>{signal}</span>
+          <span class="mx-5 inline-flex items-center gap-5"><span class="text-accentbright">+</span>{signal}</span>
         ))}
       </div>
     </div>
 
-    <div class="flex flex-col gap-2 border-t border-white/15 pt-5 text-[12px] text-white/42 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex flex-col gap-2 border-t border-white/15 pt-5 text-[12px] text-white/55 sm:flex-row sm:items-center sm:justify-between">
       <span class="font-mono uppercase tracking-[0.08em]">institutional judgment memory</span>
-      <a href="mailto:jin@memric.ai" class="text-accent no-underline">jin@memric.ai</a>
+      <a href="mailto:jin@memric.ai" class="text-accentbright no-underline">jin@memric.ai</a>
     </div>
   </div>
 </footer>

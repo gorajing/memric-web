@@ -69,7 +69,7 @@ const recommendations = [
 ];
 ---
 <BaseLayout
-  title="Meridian Decision Memory Report - Memric"
+  title="Meridian Decision Memory Report — Memric"
   description="A sample Memric Decision Memory Report showing cited claims, prediction calibration, dissent tracking, lineage, and open contradictions."
 >
   <div id="top"></div>
@@ -80,7 +80,7 @@ const recommendations = [
         <a href="/" class="inline-flex border border-white/30 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] text-white/72 no-underline transition-colors hover:border-white hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper">Back to Memric</a>
         <div class="mt-12 grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
           <div data-reveal>
-            <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">Illustrative Meridian artifact</p>
+            <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-accentbright">Illustrative Meridian artifact</p>
             <h1 class="font-display mt-4 max-w-[10ch] text-[54px] font-semibold leading-[0.9] tracking-normal sm:text-[82px] lg:text-[108px]">Decision Memory Report</h1>
           </div>
           <div class="max-w-[68ch]" data-reveal style="--reveal-delay: 120ms">
@@ -91,7 +91,7 @@ const recommendations = [
               {reportStats.map((stat) => (
                 <div class="bg-ink px-4 py-3">
                   <p class="font-display text-[34px] leading-none text-paper">{stat.value}</p>
-                  <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.08em] text-white/48">{stat.label}</p>
+                  <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.08em] text-white/55">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -115,7 +115,7 @@ const recommendations = [
               {reportNav.map((item) => (
                 <li>
                   <a href={item.href} data-report-target={item.href.slice(1)} class="report-index-link grid grid-cols-[38px_1fr] bg-viz px-3 py-3 text-ink no-underline">
-                    <span class="font-mono text-[10px] text-gutter">{item.n}</span>
+                    <span class="font-mono text-[10px] text-caption">{item.n}</span>
                     <span class="text-[13px] font-semibold leading-snug">{item.label}</span>
                   </a>
                 </li>
@@ -131,7 +131,7 @@ const recommendations = [
                     <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-caption">{item.kind}</span>
                     <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{item.state}</span>
                   </div>
-                  <p class="mt-2 font-mono text-[11px] text-gutter">{item.id}</p>
+                  <p class="mt-2 font-mono text-[11px] text-caption">{item.id}</p>
                   <p class="mt-1 text-[13px] font-semibold leading-snug text-ink">{item.label}</p>
                 </div>
               ))}
@@ -150,7 +150,7 @@ const recommendations = [
             {executiveSignals.map((signal) => (
               <article class="reveal-card border border-hairline bg-viz p-4">
                 <div class="flex items-baseline justify-between gap-4">
-                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-gutter">{signal.id}</span>
+                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-caption">{signal.id}</span>
                   <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-accent">{signal.label}</span>
                 </div>
                 <p class="mt-4 text-[14px] leading-relaxed text-bodytext">{signal.text}</p>
@@ -172,7 +172,7 @@ const recommendations = [
             <ol role="list" class="mt-8 border border-ink bg-ink">
               {timeline.map((item) => (
                 <li class="grid gap-px border-b border-ink last:border-b-0 md:grid-cols-[140px_210px_1fr]">
-                  <div class="bg-viz px-4 py-4 font-mono text-[11px] uppercase tracking-[0.08em] text-gutter">{item.when}</div>
+                  <div class="bg-viz px-4 py-4 font-mono text-[11px] uppercase tracking-[0.08em] text-caption">{item.when}</div>
                   <div class="bg-paper px-4 py-4 text-[14px] font-semibold text-ink">{item.record}</div>
                   <div class="bg-paper px-4 py-4 text-[14px] leading-relaxed text-caption">{item.event}</div>
                 </li>
@@ -261,7 +261,7 @@ const recommendations = [
           <ol role="list" class="mt-6 grid gap-px border border-ink bg-ink">
             {recommendations.map((item, index) => (
               <li class="grid grid-cols-[48px_1fr] bg-paper">
-                <span class="bg-viz px-4 py-4 font-mono text-[11px] text-gutter">{String(index + 1).padStart(2, '0')}</span>
+                <span class="bg-viz px-4 py-4 font-mono text-[11px] text-caption">{String(index + 1).padStart(2, '0')}</span>
                 <span class="px-4 py-4 text-[14px] leading-relaxed text-bodytext">{item}</span>
               </li>
             ))}
@@ -274,7 +274,7 @@ const recommendations = [
       <div class="mx-auto max-w-[1320px] px-5 py-14 sm:px-8 lg:px-12">
         <div class="flex flex-col justify-between gap-5 border border-ink bg-ink p-5 text-paper sm:flex-row sm:items-center sm:p-7" data-reveal>
           <div>
-            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/48">Meridian is illustrative</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/55">Meridian is illustrative</p>
             <p class="mt-2 max-w-[66ch] text-[15px] leading-relaxed text-white/72">A real engagement replaces this fictional corpus with your firm's documents and keeps the generated ledger running after the report.</p>
           </div>
           <a href="mailto:jin@memric.ai" class="shrink-0 bg-paper px-[22px] py-[13px] text-[14px] font-medium text-ink no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper">Discuss an audit</a>

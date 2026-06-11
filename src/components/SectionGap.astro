@@ -72,7 +72,7 @@ const stateRows = ['owner', 'confidence', 'evidence', 'outcome'];
                   data-outcome={doc.outcome}
                 >
                   <span class="flex items-baseline justify-between gap-3">
-                    <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-gutter">{doc.meta}</span>
+                    <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-caption">{doc.meta}</span>
                     <span class="state-source-dot" aria-hidden="true"></span>
                   </span>
                   <span class="mt-2 block text-[15px] font-semibold text-ink">{doc.title}</span>
@@ -88,12 +88,12 @@ const stateRows = ['owner', 'confidence', 'evidence', 'outcome'];
               <div class="mt-4 grid gap-px border border-white/20 bg-white/20">
                 {stateRows.map((row) => (
                   <div class="state-row bg-ink px-3 py-3" data-state-row={row}>
-                    <p class="font-mono text-[9px] uppercase tracking-[0.08em] text-white/38">{row}</p>
+                    <p class="font-mono text-[9px] uppercase tracking-[0.08em] text-white/55">{row}</p>
                     <p class="mt-1 min-h-[20px] text-[13px] font-semibold leading-snug text-paper" data-state-value={row}>-</p>
                   </div>
                 ))}
               </div>
-              <div class="mt-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.08em] text-white/45">
+              <div class="mt-4 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.08em] text-white/55">
                 <span class="h-px flex-1 bg-white/25"></span>
                 <span>lineage kept</span>
                 <span class="h-px flex-1 bg-white/25"></span>

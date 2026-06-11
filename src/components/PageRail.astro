@@ -4,7 +4,8 @@ const markers = [
   { href: '#proof', label: 'Proof', n: '01' },
   { href: '#surfaces', label: 'Surfaces', n: '02' },
   { href: '#audit', label: 'Audit', n: '03' },
-  { href: '#contact', label: 'Contact', n: '04' },
+  { href: '#trust', label: 'Trust', n: '04' },
+  { href: '#contact', label: 'Contact', n: '05' },
 ];
 ---
 <nav class="page-rail hidden xl:block" aria-label="Page sections" data-page-rail>
@@ -16,7 +17,7 @@ const markers = [
           class="page-rail-link group flex items-center justify-end gap-2 no-underline"
           data-rail-target={marker.href.slice(1)}
         >
-          <span class="page-rail-label font-mono text-[9px] uppercase tracking-[0.08em] text-caption opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+          <span class="page-rail-label pointer-events-none font-mono text-[9px] uppercase tracking-[0.08em] text-caption opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
             {marker.n} {marker.label}
           </span>
           <span class="page-rail-dot" aria-hidden="true"></span>

@@ -9,6 +9,7 @@ test('page rail renders section anchors and active-state hooks', async () => {
   expect(html).toContain('data-page-rail');
   expect(html).toContain('data-rail-target="ledger"');
   expect(html).toContain('href="#proof"');
+  expect(html).toContain('href="#trust"');
   expect(html).toContain('href="#contact"');
   expect(html).toContain('page-rail-dot');
 });

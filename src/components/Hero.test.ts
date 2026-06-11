@@ -11,7 +11,6 @@ test('hero states the ledger thesis, CTAs, and typed decision records', async ()
   expect(html).toContain('Get in touch');
   expect(html).toContain('/meridian-report/');
   expect(html).toContain('View sample report');
-  expect(html).toContain('https://github.com/gorajing/memric');
   expect(html).toContain('data-evidence-panel');
   expect(html).toContain('data-ledger-trigger="prediction"');
   expect(html).toContain('source trace active');

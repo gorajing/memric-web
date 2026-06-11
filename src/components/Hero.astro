@@ -73,7 +73,6 @@ const tapeItems = [
         <div class="mt-6 flex flex-wrap gap-3 sm:mt-7">
           <a href="mailto:jin@memric.ai" class="bg-ink px-[22px] py-[13px] text-[14px] font-medium text-paper no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">Get in touch</a>
           <a href="/meridian-report/" class="border border-accent px-[22px] py-[13px] text-[14px] font-medium text-accent no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View sample report</a>
-          <a href="https://github.com/gorajing/memric" class="border border-ink px-[22px] py-[13px] text-[14px] font-medium text-ink no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">View GitHub</a>
         </div>
         <div class="mt-6 grid grid-cols-2 gap-px border border-ink bg-ink sm:mt-7 sm:grid-cols-4">
           {metrics.map((metric) => (
@@ -104,7 +103,8 @@ const tapeItems = [
               We hold that <mark data-evidence="principle echo" class="evidence-source bg-redtint px-1 text-ink">AI-infrastructure margins are structurally durable</mark> as hyperscaler capex compounds. The principal risk is <span data-evidence="dissent" class="evidence-source px-1">in-house silicon compressing the moat faster than the market expects</span>.
             </p>
             <p data-evidence="dissent" class="evidence-source border-l-2 border-correct bg-paper/60 py-2 pl-4 text-[14px] text-caption">
-              Dissent recorded: J. Okafor argues hyperscaler ASIC programs will cap margin expansion by 2025.
+              <span class="font-display text-[15px] italic">“Hyperscaler ASIC programs will cap margin expansion by 2025.”</span>
+              <span class="mt-1 block font-mono text-[11px]">— J. Okafor, dissent recorded 2024-Q2</span>
             </p>
           </div>
         </article>
@@ -117,9 +117,9 @@ const tapeItems = [
             </div>
             <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-white/50">4 records</span>
           </div>
-          <div class="mt-5 flex items-center justify-between gap-4 border border-white/15 bg-white/[0.04] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-white/48">
+          <div class="mt-5 flex items-center justify-between gap-4 border border-white/15 bg-white/[0.04] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] text-white/55">
             <span>Select a record</span>
-            <span class="text-accent">source trace active</span>
+            <span class="text-accentbright">source trace active</span>
           </div>
           <div class="mt-3 grid gap-3">
             {ledgerItems.map((item) => (
@@ -149,7 +149,7 @@ const tapeItems = [
       <div class="grid gap-px bg-hairline border-x border-b border-ink sm:grid-cols-4">
         {['Sector thesis', 'IC memo', 'Post-mortem', 'Retired principle'].map((step, index) => (
           <div class="bg-paper px-4 py-4">
-            <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-gutter">0{index + 1}</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-caption">0{index + 1}</p>
             <p class="mt-1 text-[13px] font-semibold text-ink">{step}</p>
           </div>
         ))}

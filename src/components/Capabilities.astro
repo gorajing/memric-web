@@ -55,8 +55,8 @@ const questions = [
       <div class="grid gap-px lg:grid-cols-[0.46fr_1fr]">
         <aside class="bg-ink p-4 text-paper sm:p-5" aria-label="Decision cockpit question selector">
           <div class="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
-            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/48">Decision cockpit</p>
-            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-accent">4 live views</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-white/55">Decision cockpit</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-accentbright">4 live views</p>
           </div>
           <div class="mt-4 grid gap-2" role="tablist" aria-label="Buyer questions" aria-orientation="vertical">
             {questions.map((item, index) => (
@@ -71,7 +71,7 @@ const questions = [
                 class={`question-button ${index === 0 ? 'is-active' : ''} border border-white/15 bg-white/[0.04] px-4 py-4 text-left text-paper`}
               >
                 <span class="flex items-baseline justify-between gap-4">
-                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-white/42">{item.n} / {item.label}</span>
+                  <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-white/55">{item.n} / {item.label}</span>
                   <span class="question-button-mark" aria-hidden="true"></span>
                 </span>
                 <span class="mt-3 block font-display text-[24px] font-semibold leading-tight tracking-normal">{item.question}</span>
@@ -82,7 +82,7 @@ const questions = [
         </aside>
 
         <div class="bg-paper p-4 sm:p-6">
-          <article id="question-panel-calibration" role="tabpanel" aria-labelledby="question-tab-calibration" data-question-panel="calibration" class="question-panel is-active">
+          <div id="question-panel-calibration" role="tabpanel" aria-labelledby="question-tab-calibration" data-question-panel="calibration" class="question-panel is-active">
             <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
               <div>
                 <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
@@ -99,9 +99,9 @@ const questions = [
                 <CalibrationChart />
               </div>
             </div>
-          </article>
+          </div>
 
-          <article id="question-panel-belief" role="tabpanel" aria-labelledby="question-tab-belief" data-question-panel="belief" class="question-panel">
+          <div id="question-panel-belief" role="tabpanel" aria-labelledby="question-tab-belief" data-question-panel="belief" class="question-panel">
             <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
               <div>
                 <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
@@ -118,9 +118,9 @@ const questions = [
                 <BeliefDiff />
               </div>
             </div>
-          </article>
+          </div>
 
-          <article id="question-panel-dissent" role="tabpanel" aria-labelledby="question-tab-dissent" data-question-panel="dissent" class="question-panel">
+          <div id="question-panel-dissent" role="tabpanel" aria-labelledby="question-tab-dissent" data-question-panel="dissent" class="question-panel">
             <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
               <div>
                 <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
@@ -137,9 +137,9 @@ const questions = [
                 <DissentTimeline />
               </div>
             </div>
-          </article>
+          </div>
 
-          <article id="question-panel-contradiction" role="tabpanel" aria-labelledby="question-tab-contradiction" data-question-panel="contradiction" class="question-panel">
+          <div id="question-panel-contradiction" role="tabpanel" aria-labelledby="question-tab-contradiction" data-question-panel="contradiction" class="question-panel">
             <div class="grid gap-6 lg:grid-cols-[0.55fr_1fr] lg:items-end">
               <div>
                 <p class="font-mono text-[10.5px] tracking-[0.08em] uppercase text-graytext mb-1">
@@ -156,7 +156,7 @@ const questions = [
                 <ContradictionPair />
               </div>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </div>

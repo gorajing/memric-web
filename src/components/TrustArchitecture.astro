@@ -1,7 +1,7 @@
 ---
 import LineageGraph from './viz/LineageGraph.astro';
 ---
-<section aria-labelledby="trust-heading" class="bg-sectionpaper border-t border-ink/80">
+<section id="trust" aria-labelledby="trust-heading" class="bg-sectionpaper border-t border-ink/80">
   <div class="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
     <div class="chapter-grid">
       <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
@@ -14,7 +14,7 @@ import LineageGraph from './viz/LineageGraph.astro';
         <article class="audit-panel border border-ink bg-paper" aria-label="Evidence card for a retired principle">
           <div class="border-b border-ink px-5 py-4 sm:px-6">
             <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Claim card / PRI-0042</p>
-            <h3 class="font-display mt-2 text-[29px] font-semibold tracking-normal leading-tight">AI-infrastructure margins are structurally durable.</h3>
+            <h3 class="font-display mt-2 text-[29px] font-semibold italic tracking-normal leading-tight">“AI-infrastructure margins are structurally durable.”</h3>
           </div>
           <div class="grid gap-px bg-hairline sm:grid-cols-2">
             <div class="bg-paper px-5 py-4 sm:px-6">
@@ -29,6 +29,10 @@ import LineageGraph from './viz/LineageGraph.astro';
         </article>
         <div class="border border-ink bg-viz p-6 overflow-x-auto" tabindex="0" role="region" aria-label="Lineage diagram (scrollable)">
           <LineageGraph />
+        </div>
+        <div class="border border-ink bg-paper p-5 sm:p-6">
+          <p class="font-mono text-[10px] uppercase tracking-[0.08em] text-graytext">Document handling</p>
+          <p class="mt-2 max-w-[64ch] text-[14px] leading-relaxed text-bodytext">The audit runs the engine the same way: locally or inside your VPC. Raw documents never have to leave your environment, and the deliverables — the report and the running instance — are yours to keep.</p>
         </div>
         <div class="grid gap-px border border-ink bg-ink sm:grid-cols-3">
           <div class="bg-paper p-5">
