@@ -1,0 +1,271 @@
+---
+// FRESH PROTOTYPE — parallel design exploration. Delete freely.
+import FreshLayout from '../layouts/FreshLayout.astro';
+
+const entries = {
+  source: {
+    date: ['2023', 'Q3'],
+    label: 'Source · IC memo / NVDA initiation',
+    record: [
+      ['RECORD', 'PRINCIPLE · PRI-0042'],
+      ['BELIEF', 'AI-infrastructure margins are structurally durable'],
+      ['OWNER', 'D. Park'],
+      ['CONFIDENCE', 'High'],
+      ['SOURCE', 'SRC-2309-A17 · paragraph 2'],
+    ],
+  },
+  echo: {
+    record: [
+      ['RECORD', 'ECHO · LIVE-2606-P01'],
+      ['MATCHES', 'PRI-0042 — retired 2026-Q1'],
+      ['WHERE', 'Current allocation memo, page 3'],
+      ['STATUS', 'Open — raised before IC'],
+    ],
+  },
+};
+---
+<FreshLayout>
+  <!-- top bar -->
+  <header class="border-b border-inkwarm">
+    <div class="mx-auto flex max-w-[1280px] items-baseline justify-between px-5 py-4 sm:px-8">
+      <p class="font-mono text-[12px] font-semibold tracking-[0.14em] uppercase">
+        Memric <span class="text-quiet">· Ledger Nº 001</span>
+      </p>
+      <a
+        href="mailto:jin@memric.ai"
+        class="font-mono text-[11px] tracking-[0.12em] uppercase text-ledger underline decoration-1 underline-offset-4 hover:text-inkwarm"
+        >Get in touch</a
+      >
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- cover -->
+    <section class="border-b border-inkwarm" aria-label="Cover">
+      <div class="mx-auto max-w-[1280px] px-5 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16">
+        <p class="font-mono text-[11px] tracking-[0.16em] uppercase text-ledger">
+          Institutional judgment memory · for investment firms
+        </p>
+        <h1 class="voice mt-6 max-w-[24ch] text-[44px] leading-[1.02] text-balance sm:text-[72px] lg:text-[88px]">
+          Your firm remembers every document. It&nbsp;forgets every judgment.
+        </h1>
+        <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_420px] lg:items-end">
+          <p class="max-w-[58ch] text-[17px] leading-[1.7] text-pretty text-quiet sm:text-[18px]">
+            Memric turns IC memos, post-mortems, and meeting notes into a ledger of record:
+            what the firm believed, who dissented, what held up — and which live decisions
+            echo old mistakes. Below is one belief, replayed across four years.
+          </p>
+          <div class="flex flex-wrap gap-3 lg:justify-end">
+            <a
+              href="mailto:jin@memric.ai"
+              class="bg-ledger px-6 py-3.5 text-[14px] font-medium text-bone no-underline hover:bg-inkwarm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger"
+              >Start a 4-week audit</a
+            >
+            <a
+              href="#ledger"
+              class="border border-inkwarm px-6 py-3.5 text-[14px] font-medium text-inkwarm no-underline hover:bg-bonedeep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inkwarm"
+              >Read the ledger</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- the ledger -->
+    <div id="ledger" class="double-rule">
+      <!-- ENTRY · 2023-Q3 — the memo -->
+      <section class="spine-grid border-b border-inkwarm" aria-label="2023-Q3 — the memo">
+        <div class="spine-gutter ruled px-4 py-16 text-right sm:px-6">
+          <span class="spine-node" aria-hidden="true"></span>
+          <p class="font-mono text-[13px] font-semibold leading-snug">2023<br />Q3</p>
+        </div>
+        <div class="ruled px-5 py-16 sm:px-10">
+          <div class="max-w-[760px]" data-freveal>
+            <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-ledger">{entries.source.label}</p>
+            <blockquote class="voice mt-6 text-[28px] leading-[1.25] text-pretty sm:text-[38px]">
+              “We hold that AI-infrastructure margins are structurally durable as hyperscaler
+              capex compounds.”
+            </blockquote>
+            <p class="mt-4 font-mono text-[12px] text-quiet">— D. Park, written in conviction, filed, forgotten.</p>
+
+            <div class="record-card mt-10 font-mono text-[12.5px]" data-freveal style="--fr-delay: 140ms">
+              <p class="border-b border-inkwarm px-4 py-2.5 text-[10.5px] tracking-[0.14em] uppercase text-ledger">
+                Typed into the ledger
+              </p>
+              {entries.source.record.map(([k, v]) => (
+                <div class="record-row">
+                  <span class="text-[10.5px] tracking-[0.12em] uppercase text-quiet pt-0.5">{k}</span>
+                  <span class="font-medium">{v}</span>
+                </div>
+              ))}
+            </div>
+            <p class="mt-5 max-w-[56ch] text-[15px] leading-[1.65] text-quiet">
+              The sentence becomes a typed record — owner, confidence, source lineage.
+              Nothing in this ledger is a recollection.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENTRY · 2024-Q4 — the resolution -->
+      <section class="spine-grid border-b border-inkwarm" aria-label="2024-Q4 — the prediction resolves">
+        <div class="spine-gutter ruled px-4 py-16 text-right sm:px-6">
+          <span class="spine-node" aria-hidden="true"></span>
+          <p class="font-mono text-[13px] font-semibold leading-snug">2024<br />Q4</p>
+        </div>
+        <div class="ruled px-5 py-16 sm:px-10">
+          <div class="max-w-[760px]" data-freveal>
+            <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-ledger">Resolution · prediction carried to outcome</p>
+            <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-6">
+              <blockquote class="voice text-[28px] leading-[1.25] sm:text-[38px]">
+                “Demand outruns supply through 2024-Q4.”
+              </blockquote>
+              <span class="stamp stamp-green text-[14px]" data-fstamp>Resolved true</span>
+            </div>
+            <p class="mt-6 max-w-[56ch] text-[15px] leading-[1.65] text-quiet">
+              Every forecast is held to its outcome. Author calibration becomes a number —
+              <span class="font-mono text-[13px] text-inkwarm">+0.8σ</span> — and patterned
+              overconfidence stops hiding between quarters.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENTRY · 2025-Q1 — the dissent -->
+      <section class="spine-grid border-b border-inkwarm" aria-label="2025-Q1 — the dissent is vindicated">
+        <div class="spine-gutter ruled px-4 py-16 text-right sm:px-6">
+          <span class="spine-node" aria-hidden="true"></span>
+          <p class="font-mono text-[13px] font-semibold leading-snug">2025<br />Q1</p>
+        </div>
+        <div class="ruled px-5 py-16 sm:px-10">
+          <div class="max-w-[760px]" data-freveal>
+            <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-ledger">Dissent · recorded when it was unpopular</p>
+            <blockquote class="voice mt-6 text-[28px] leading-[1.25] text-pretty sm:text-[38px]">
+              “Hyperscaler ASIC programs will cap margin expansion.”
+            </blockquote>
+            <p class="mt-4 font-mono text-[12px] text-quiet">— J. Okafor, Slack thread DST-2405-C12. Buried the day it was written.</p>
+            <div class="mt-8 flex flex-wrap items-center gap-x-10 gap-y-6">
+              <span class="stamp stamp-green text-[14px]" data-fstamp>Vindicated</span>
+              <p class="font-mono text-[15px] text-inkwarm"><span class="text-[28px] font-semibold sm:text-[36px]">+14 months</span> early</p>
+            </div>
+            <p class="mt-6 max-w-[56ch] text-[15px] leading-[1.65] text-quiet">
+              The correct contrarian stops being invisible. Credit survives the consensus
+              that buried it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENTRY · 2026-Q1 — the retirement -->
+      <section class="spine-grid border-b border-inkwarm" aria-label="2026-Q1 — the principle is retired">
+        <div class="spine-gutter ruled px-4 py-16 text-right sm:px-6">
+          <span class="spine-node" aria-hidden="true"></span>
+          <p class="font-mono text-[13px] font-semibold leading-snug">2026<br />Q1</p>
+        </div>
+        <div class="ruled px-5 py-16 sm:px-10">
+          <div class="max-w-[760px]" data-freveal>
+            <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-ledger">Retirement · with receipts, not deletion</p>
+            <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-6">
+              <blockquote class="voice struck-line text-[28px] leading-[1.25] sm:text-[38px]">
+                “AI-infrastructure margins are structurally durable.”
+              </blockquote>
+              <span class="stamp stamp-green text-[14px]" data-fstamp>Retired</span>
+            </div>
+            <p class="mt-6 font-mono text-[12.5px] leading-[1.9] text-quiet">
+              superseded by 3 post-mortems · PM-2601-B03 · replaced by a narrower
+              margin-cycle principle
+            </p>
+            <p class="mt-5 max-w-[56ch] text-[15px] leading-[1.65] text-quiet">
+              A retired belief is not erased. It becomes a dated record of what the firm
+              believed and the evidence that changed it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENTRY · TODAY — the echo (the only red on the page) -->
+      <section class="entry-echo spine-grid border-b border-inkwarm bg-oxbloodtint" aria-label="Today — a live proposal echoes the retired principle">
+        <div class="spine-gutter ruled px-4 py-16 text-right sm:px-6">
+          <span class="spine-node" aria-hidden="true"></span>
+          <p class="font-mono text-[13px] font-semibold leading-snug text-oxblood">TO<br />DAY</p>
+        </div>
+        <div class="ruled px-5 py-16 sm:px-10">
+          <div class="max-w-[760px]" data-freveal>
+            <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-oxblood">Echo · the moment firms miss</p>
+            <blockquote class="voice mt-6 text-[28px] leading-[1.25] text-pretty sm:text-[38px]">
+              The current allocation memo repeats the retired margin assumption.
+            </blockquote>
+            <div class="record-card mt-10 font-mono text-[12.5px]" data-freveal style="--fr-delay: 140ms">
+              <p class="border-b border-oxblood px-4 py-2.5 text-[10.5px] tracking-[0.14em] uppercase text-oxblood">
+                Raised by Memric
+              </p>
+              {entries.echo.record.map(([k, v]) => (
+                <div class="record-row">
+                  <span class="text-[10.5px] tracking-[0.12em] uppercase text-quiet pt-0.5">{k}</span>
+                  <span class="font-medium">{v}</span>
+                </div>
+              ))}
+            </div>
+            <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
+              <span class="stamp stamp-red text-[14px]" data-fstamp>Before IC</span>
+              <p class="max-w-[44ch] text-[15px] leading-[1.6] text-quiet">
+                Flagged before the meeting — not found in the post-mortem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENTRY · your firm — the offer -->
+      <section class="spine-grid" aria-label="The offer — a four week audit">
+        <div class="spine-gutter ruled px-4 py-16 text-right sm:px-6">
+          <span class="spine-node" aria-hidden="true"></span>
+          <p class="font-mono text-[13px] font-semibold leading-snug">YOUR<br />FIRM</p>
+        </div>
+        <div class="ruled px-5 py-16 sm:px-10">
+          <div class="max-w-[760px]" data-freveal>
+            <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-ledger">Engagement · Decision Memory Audit / 4 weeks</p>
+            <h2 class="voice mt-6 text-[32px] leading-[1.15] text-balance sm:text-[44px]">
+              Run this replay on your own documents.
+            </h2>
+            <div class="mt-9 grid gap-px border border-inkwarm bg-inkwarm sm:grid-cols-2">
+              <div class="bg-bone p-5">
+                <p class="font-mono text-[10.5px] tracking-[0.14em] uppercase text-ledger">You bring</p>
+                <p class="mt-3 text-[15px] leading-[1.65]">12–50 representative memos, post-mortems, letters, and dissent threads.</p>
+              </div>
+              <div class="bg-bone p-5">
+                <p class="font-mono text-[10.5px] tracking-[0.14em] uppercase text-ledger">You keep</p>
+                <p class="mt-3 text-[15px] leading-[1.65]">The Decision Memory Report and a running Memric instance, replayable against every source.</p>
+              </div>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a
+                href="mailto:jin@memric.ai?subject=Memric%20Decision%20Memory%20Audit"
+                class="bg-ledger px-6 py-3.5 text-[14px] font-medium text-bone no-underline hover:bg-inkwarm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ledger"
+                >Start audit brief</a
+              >
+              <a
+                href="/meridian-report/"
+                class="border border-inkwarm px-6 py-3.5 text-[14px] font-medium text-inkwarm no-underline hover:bg-bonedeep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inkwarm"
+                >Open sample report</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- close -->
+  <footer class="double-rule bg-ledger text-bone">
+    <div class="mx-auto max-w-[1280px] px-5 py-12 sm:px-8">
+      <p class="voice max-w-[22ch] text-[34px] leading-[1.1] text-balance sm:text-[52px]">
+        Make the next memo argue with the firm’s past.
+      </p>
+      <div class="mt-8 flex flex-col gap-2 font-mono text-[12px] tracking-[0.08em] uppercase sm:flex-row sm:items-center sm:justify-between">
+        <a href="mailto:jin@memric.ai" class="text-bone underline decoration-1 underline-offset-4">jin@memric.ai</a>
+        <p class="text-bone/70">Prototype — <a href="/" class="text-bone underline decoration-1 underline-offset-4">compare with the current site</a></p>
+      </div>
+    </div>
+  </footer>
+</FreshLayout>
