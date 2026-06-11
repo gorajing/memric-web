@@ -543,7 +543,32 @@ section {
   }
 }
 
+/* Scene 3 — opening the deliverable. Native cross-document view transition:
+   the report thumbnail on index morphs into the report page's header band.
+   Pure CSS over real navigations — component scripts re-run naturally, Firefox
+   and older browsers get a plain instant navigation. */
+.vt-report {
+  view-transition-name: meridian-report;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(meridian-report) {
+    animation-duration: var(--duration-base);
+    animation-timing-function: var(--ease-settle);
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--duration-fast);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
