@@ -415,6 +415,43 @@ body::before {
   box-shadow: 0 18px 44px rgba(17, 17, 17, 0.1);
 }
 
+/* Extraction scene (Hero): lineage edge + record type-in. JS-applied classes only —
+   SSR markup is always the settled state. */
+.extract-scene {
+  position: relative;
+}
+
+.extract-edge {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: visible;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.extract-pending {
+  border-style: dashed !important;
+}
+
+.extract-pending .extract-f {
+  opacity: 0;
+}
+
+.extract-typing .extract-f {
+  display: inline-block;
+  opacity: 1;
+  clip-path: inset(-4px 100% -4px -4px);
+  animation: extract-type var(--extract-dur, 380ms) steps(var(--extract-steps, 24), end)
+    var(--extract-delay, 0ms) forwards;
+}
+
+@keyframes extract-type {
+  to {
+    clip-path: inset(-4px -4px -4px -4px);
+  }
+}
+
 section {
   scroll-margin-top: 88px;
 }

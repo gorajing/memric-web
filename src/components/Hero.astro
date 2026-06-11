@@ -190,8 +190,172 @@ const tapeItems = [
       trigger.addEventListener('click', () => setActiveEvidence(trigger.dataset.ledgerTrigger));
     });
 
-    if (triggers[0]?.dataset.ledgerTrigger) {
-      setActiveEvidence(triggers[0].dataset.ledgerTrigger);
+    // --- Extraction scene: a lineage edge draws from the memo's source span to the
+    // principle record, which types itself into the ledger. Plays once, then hands
+    // state to the live hover-trace above. Progressive enhancement only: SSR markup
+    // is the settled state, so no-JS, reduced-motion, and skipped-past visitors see
+    // the page exactly as it is today.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mark = panel.querySelector<HTMLElement>('mark[data-evidence~="principle"]');
+    const record = triggers.find((t) => t.dataset.ledgerTrigger === 'principle');
+    const sceneEligible =
+      !reduceMotion && mark && record && panel.getBoundingClientRect().bottom > 0;
+
+    const settle = () => setActiveEvidence(triggers[0]?.dataset.ledgerTrigger);
+
+    if (!sceneEligible || !mark || !record) {
+      settle();
+      return;
     }
+
+    const tagFields = () => {
+      const headSpans = record.querySelectorAll<HTMLElement>(':scope > div:first-child > span');
+      const detail = record.querySelector<HTMLElement>(':scope > p');
+      const metaSpans = record.querySelectorAll<HTMLElement>(':scope > div:last-child > span');
+      const fields: Array<{ el: HTMLElement; delay: number; dur: number }> = [];
+      if (headSpans[0]) fields.push({ el: headSpans[0], delay: 0, dur: 160 });
+      if (headSpans[1]) fields.push({ el: headSpans[1], delay: 140, dur: 160 });
+      if (detail) fields.push({ el: detail, delay: 320, dur: 420 });
+      if (metaSpans[0]) fields.push({ el: metaSpans[0], delay: 760, dur: 240 });
+      if (metaSpans[1]) fields.push({ el: metaSpans[1], delay: 920, dur: 280 });
+      return fields;
+    };
+
+    const drawEdge = (): SVGSVGElement | null => {
+      if (!window.matchMedia('(min-width: 1024px)').matches) return null;
+      const ns = 'http://www.w3.org/2000/svg';
+      const pr = panel.getBoundingClientRect();
+      const mr = mark.getBoundingClientRect();
+      const rr = record.getBoundingClientRect();
+      const ar = (record.closest('aside') ?? record).getBoundingClientRect();
+      const x1 = mr.right - pr.left - 5;
+      const yT = mr.top - pr.top;
+      const yLane = yT - 10;
+      const x2 = rr.left - pr.left - 2;
+      const y2 = rr.top + rr.height / 2 - pr.top;
+      const gx = ar.left - pr.left - 16;
+      const r = 10;
+
+      const svg = document.createElementNS(ns, 'svg') as SVGSVGElement;
+      svg.setAttribute('class', 'extract-edge');
+      svg.setAttribute('viewBox', `0 0 ${pr.width} ${pr.height}`);
+      svg.setAttribute('width', String(pr.width));
+      svg.setAttribute('height', String(pr.height));
+      svg.setAttribute('aria-hidden', 'true');
+
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute(
+        'd',
+        `M ${x1} ${yT} L ${x1} ${yLane + r} Q ${x1} ${yLane}, ${x1 + r} ${yLane} ` +
+          `L ${gx - r} ${yLane} Q ${gx} ${yLane}, ${gx} ${yLane + r} ` +
+          `L ${gx} ${y2 - r} Q ${gx} ${y2}, ${gx + r} ${y2} L ${x2} ${y2}`
+      );
+      path.style.fill = 'none';
+      path.style.stroke = 'var(--color-accent)';
+      path.style.strokeWidth = '1.5';
+      svg.appendChild(path);
+
+      for (const [cx, cy] of [[x1, yT], [x2, y2]] as const) {
+        const node = document.createElementNS(ns, 'rect');
+        node.setAttribute('x', String(cx - 3));
+        node.setAttribute('y', String(cy - 3));
+        node.setAttribute('width', '6');
+        node.setAttribute('height', '6');
+        node.style.fill = 'var(--color-paper)';
+        node.style.stroke = 'var(--color-accent)';
+        svg.appendChild(node);
+      }
+
+      panel.appendChild(svg);
+      const len = path.getTotalLength();
+      path.style.strokeDasharray = String(len);
+      path.style.strokeDashoffset = String(len);
+      path.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], {
+        duration: 450,
+        easing: 'ease',
+        fill: 'forwards',
+      });
+      return svg;
+    };
+
+    // Arm: the record waits as an untyped dashed shell until the panel is 55% visible.
+    const fields = tagFields();
+    panel.classList.add('extract-scene');
+    fields.forEach((f) => f.el.classList.add('extract-f'));
+    record.classList.add('extract-pending');
+
+    const playScene = () => {
+      setTimeout(() => {
+        panel
+          .querySelectorAll<HTMLElement>('[data-evidence~="principle"]')
+          .forEach((el) => el.classList.add('is-active'));
+      }, 60);
+
+      let edge: SVGSVGElement | null = null;
+      setTimeout(() => {
+        edge = drawEdge();
+      }, 220);
+
+      setTimeout(() => {
+        record.classList.remove('extract-pending');
+        record.classList.add('extract-typing');
+        fields.forEach((f) => {
+          f.el.style.setProperty('--extract-delay', `${f.delay}ms`);
+          f.el.style.setProperty('--extract-dur', `${f.dur}ms`);
+          f.el.style.setProperty(
+            '--extract-steps',
+            String(Math.max(6, Math.min(40, (f.el.textContent ?? '').length)))
+          );
+        });
+      }, 700);
+
+      setTimeout(() => {
+        if (edge) {
+          edge.style.opacity = '0';
+          setTimeout(() => edge?.remove(), 340);
+        }
+        record.classList.remove('extract-typing');
+        fields.forEach((f) => {
+          f.el.classList.remove('extract-f');
+          f.el.style.removeProperty('--extract-delay');
+          f.el.style.removeProperty('--extract-dur');
+          f.el.style.removeProperty('--extract-steps');
+        });
+        panel.classList.remove('extract-scene');
+        setActiveEvidence('principle');
+      }, 2050);
+    };
+
+    // A tall panel (mobile) can never hit 0.55 visibility — scale the threshold
+    // to "60% of the viewport is showing panel" when the panel exceeds the viewport.
+    const ratioNeeded = Math.min(0.55, (window.innerHeight * 0.6) / Math.max(1, panel.offsetHeight));
+
+    const skipScene = () => {
+      record.classList.remove('extract-pending');
+      fields.forEach((f) => f.el.classList.remove('extract-f'));
+      panel.classList.remove('extract-scene');
+      settle();
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.boundingClientRect.bottom < 0) {
+            io.disconnect();
+            skipScene();
+            return;
+          }
+          if (entry.intersectionRatio >= ratioNeeded) {
+            io.disconnect();
+            playScene();
+          }
+        });
+      },
+      // 0 must be a threshold too: an instant jump from partial visibility to
+      // offscreen never crosses ratioNeeded, but it does cross 0 — without it
+      // the skip path never fires and the shell sticks.
+      { threshold: [0, ratioNeeded] }
+    );
+    io.observe(panel);
   });
 </script>
