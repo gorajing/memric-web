@@ -1,0 +1,16 @@
+# Render Blueprint — static deploy of the Memric site.
+# Docs: https://render.com/docs/blueprint-spec · https://render.com/docs/deploy-astro
+#
+# Astro builds a multi-page static site (real HTML per route), so no SPA
+# catch-all rewrite is needed — Render serves each directory's index.html.
+# Canonical / sitemap / OG URLs default to https://memric.ai (astro.config.mjs);
+# to make them match this deploy instead, add a SITE_URL env var in the dashboard.
+services:
+  - type: web
+    runtime: static
+    name: memric-web
+    repo: https://github.com/gorajing/memric-web
+    branch: codex/decision-ledger-redesign
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    autoDeployTrigger: commit

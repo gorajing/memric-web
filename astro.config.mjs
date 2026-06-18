@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://memric.ai',
+  site: process.env.SITE_URL || 'https://memric.ai',
   output: 'static',
   vite: { plugins: [tailwindcss()] },
   integrations: [sitemap({ filter: (page) => !page.includes('/fresh') })],
